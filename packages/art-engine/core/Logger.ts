@@ -22,4 +22,6 @@ Art Engine ${version} 👄
   }
 }
 
-export default new Logger();
+const loggerInstance = new Logger();
+
+export default loggerInstance;

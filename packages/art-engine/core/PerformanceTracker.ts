@@ -157,4 +157,6 @@ class PerformanceTracker {
   }
 }
 
-export default new PerformanceTracker();
+const performanceTrackerInstance = new PerformanceTracker();
+
+export default performanceTrackerInstance;
