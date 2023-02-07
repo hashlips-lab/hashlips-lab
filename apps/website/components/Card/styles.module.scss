@@ -1,0 +1,31 @@
+.wrapper {
+  @apply flex flex-col gap-4;
+  @apply px-6 py-4;
+  @apply rounded-lg;
+
+  &.light {
+  @apply text-slate-800;
+  background-color: hsl(var(--nextra-primary-hue)100% 97%/var(--tw-bg-opacity));
+  }
+
+  &.dark {
+    color: inherit;
+    background-color: hsl(var(--nextra-primary-hue)100% 50%/.1);
+  }
+
+  .title {
+    @apply text-2xl;
+    @apply font-bold;
+  }
+
+  .content {
+    @apply flex-grow;
+  }
+  
+  .readMore {
+    @apply self-end;
+    @apply hover:underline;
+    @apply text-sm;
+    @apply font-bold;
+  }
+}

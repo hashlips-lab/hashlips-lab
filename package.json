@@ -1,0 +1,34 @@
+{
+  "name": "@hashlips-lab/hashlips-lab",
+  "version": "0.0.0",
+  "contributors": [
+    "Daniel Eugene Botha <hashlipsnft@gmail.com> <https://hashlips.online>",
+    "Marco Lipparini <developer@liarco.net> <https://www.liarco.net>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hashlips-lab/hashlips-lab.git"
+  },
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "test": "turbo run test --parallel",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "eslint-config-custom": "*",
+    "prettier": "latest",
+    "turbo": "latest"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {},
+  "packageManager": "yarn@1.22.19"
+}

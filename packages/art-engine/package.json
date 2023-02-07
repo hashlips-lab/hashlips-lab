@@ -1,0 +1,42 @@
+{
+  "name": "@hashlips-lab/art-engine",
+  "version": "2.0.0-alpha1",
+  "license": "MIT",
+  "contributors": [
+    "Daniel Eugene Botha <hashlipsnft@gmail.com> <https://hashlips.online>",
+    "Marco Lipparini <developer@liarco.net> <https://www.liarco.net>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hashlips-lab/hashlips-lab.git"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "scripts": {
+    "test": "jest",
+    "build": "cp ../../LICENSE . && tsc",
+    "watch": "tsc --watch",
+    "lint": "TIMING=1 eslint \"**/*.ts*\""
+  },
+  "dependencies": {
+    "canvas": "^2.11.0",
+    "jimp": "^0.16.2",
+    "jimp-native": "^0.0.8",
+    "random-seed": "^0.3.0",
+    "sharp": "0.31.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.2.2",
+    "@types/random-seed": "^0.3.3",
+    "config": "*",
+    "eslint": "^7.32.0",
+    "eslint-config-custom": "*",
+    "jest": "^29.2.2",
+    "ts-jest": "^29.0.3",
+    "tsconfig": "*",
+    "typescript": "^4.8.4"
+  }
+}

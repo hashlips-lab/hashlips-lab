@@ -1,0 +1,27 @@
+{
+  "name": "eslint-config-custom",
+  "version": "0.0.0",
+  "contributors": [
+    "Daniel Eugene Botha (https://hashlips.online)",
+    "Marco Lipparini <developer@liarco.net> (https://www.liarco.net)"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hashlips-lab/hashlips-lab.git"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "dependencies": {
+    "eslint": "^7.23.0",
+    "eslint-config-next": "13.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-react": "7.31.8",
+    "eslint-config-turbo": "latest"
+  },
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
