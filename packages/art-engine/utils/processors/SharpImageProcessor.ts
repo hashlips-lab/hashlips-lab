@@ -29,7 +29,7 @@ export class SharpImageProcessor implements ImageProcessorInterface {
         width: createImageWithLayersProps.width,
         height: createImageWithLayersProps.height,
         channels: 4,
-        background: 0x00000000,
+        background: { r: 0, g: 0, b: 0, alpha: 0 },
       },
     })
       .composite(normalizedAssets)
