@@ -8,18 +8,21 @@ export default {
   docsRepositoryBase: 'https://github.com/hashlips-lab/hashlips-lab/blob/main/apps/website',
   useNextSeoProps() {
     return {
-      titleTemplate: '%s – HashLips Lab'
+      titleTemplate: '%s - HashLips Lab'
     }
   },
   primaryHue: 300,
   logo: (
     <>
-      <Image src="/hashlips-mask.png" width="24" height="24" alt="HashLips Lab logo" />
+      <Image src="/images/hashlips-mask.png" width="24" height="24" alt="HashLips Lab logo" />
       <span style={{ marginLeft: '.4em', fontWeight: 800 }}>
         HashLips Lab
       </span>
     </>
   ),
+  head: <>
+    <link rel="icon" href="/hashlips-mask.png" />
+  </>,
   footer: {
     text: <span>
       MIT {new Date().getFullYear()} © <Link href="/about">HashLips Lab Team</Link>.
