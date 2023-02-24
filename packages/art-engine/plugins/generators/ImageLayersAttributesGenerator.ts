@@ -14,6 +14,7 @@ import AttributesGeneratorInterface, {
 } from "../../interfaces/generators/ItemAttributesGeneratorInterface";
 import { EDGE_CASE_UID_SEPARATOR } from "../inputs/ImageLayersInput";
 import RandomSeed from "random-seed";
+import MetadataInputInterface from "../../interfaces/inputs/MetadataInputInterface";
 
 type Options = ImageLayersInputInterface["layers"][string]["options"];
 type GeneratorOutput =
@@ -25,17 +26,21 @@ export class ImageLayersAttributesGenerator
 {
   private inputsManager!: InputsManager;
   private dataSet!: string;
+  private metadataSet!: string;
   private data!: ImageLayersInputInterface;
+  private metadata!: MetadataInputInterface;
   private startIndex: number;
   private endIndex: number;
   private rmg!: RandomSeed.RandomSeed;
 
   constructor(constructorProps: {
     dataSet: string;
+    metadataSet?: string;
     startIndex: number;
     endIndex: number;
   }) {
-    this.dataSet = constructorProps.dataSet;
+    this.dataSet = constructorProps.dataSet ?? "";
+    this.metadataSet = constructorProps.metadataSet ?? "";
     this.startIndex = constructorProps.startIndex;
     this.endIndex = constructorProps.endIndex;
 
@@ -52,27 +57,40 @@ export class ImageLayersAttributesGenerator
   public async init(props: GeneratorInitPropsInterface) {
     this.inputsManager = props.inputsManager;
     this.data = this.inputsManager.get(this.dataSet);
+    if (this.metadataSet) {
+      this.metadata = this.inputsManager.get(this.metadataSet);
+    }
 
     this.rmg = RandomSeed.create(
       this.dataSet + this.constructor.name + props.seed
     );
+
     // TODO: add support for "kind"
   }
 
   public async generate(): Promise<ItemsAttributes<GeneratorOutput>> {
     const items: ItemsAttributes<GeneratorOutput> = {};
     const dnas = new Set<string>();
+    const metadataKeys = this.metadata ? Object.keys(this.metadata) : [];
 
-    let uid = this.startIndex;
-    while (uid <= this.endIndex) {
+    let uid = !this.metadata ? this.startIndex : 0;
+    let endIndex = !this.metadata ? this.endIndex : metadataKeys.length - 1;
+
+    while (uid <= endIndex) {
       const itemAttributes: AttributesGeneratorInterface["attributes"] = {};
       let itemAssets: ImageLayersGeneratorInterface["assets"] = [];
 
       // Compute attributes
-      for (let layer of Object.values(this.data.layers)) {
-        itemAttributes[layer.name] = this.selectRandomItemByWeight(
-          layer.options
-        );
+      if (!this.metadata) {
+        for (let layer of Object.values(this.data.layers)) {
+          itemAttributes[layer.name] = this.selectRandomItemByWeight(
+            layer.options
+          );
+        }
+      } else {
+        for (let attribute of this.metadata[metadataKeys[uid]].attributes) {
+          itemAttributes[attribute.trait_type] = attribute.value;
+        }
       }
 
       // Compute DNA
@@ -121,7 +139,7 @@ export class ImageLayersAttributesGenerator
         );
       }
 
-      items[uid.toString()] = [
+      items[!this.metadata ? uid.toString() : metadataKeys[uid]] = [
         {
           kind: ITEM_ATTRIBUTES_GENERATOR_INTERFACE_V1,
           data: {

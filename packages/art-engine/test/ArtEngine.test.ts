@@ -7,6 +7,7 @@ import { ImagesExporter } from "../plugins/exporters/ImagesExporter";
 import { SharpImageProcessor } from "../utils/processors/SharpImageProcessor";
 import { Erc721MetadataExporter } from "../plugins/exporters/Erc721MetadataExporter";
 import { SolMetadataExporter } from "../plugins/exporters/SolMetadataExporter";
+import { MetadataInput } from "../plugins/inputs/MetadataInput";
 
 const BASE_PATH = __dirname;
 
@@ -18,12 +19,17 @@ test("ArtEngine", async () => {
     outputPath: `${BASE_PATH}/data/output`,
     inputs: {
       apes: new ImageLayersInput({
-        assetsBasePath: `${BASE_PATH}/data/layers`,
+        assetsBasePath: `${BASE_PATH}/data/mutant layers`,
+      }),
+      metadata: new MetadataInput({
+        metadataBasePath: `${BASE_PATH}/data/metadata/_metadata_test.json`,
+        uid: "edition",
       }),
     },
     generators: [
       new ImageLayersAttributesGenerator({
         dataSet: "apes",
+        metadataSet: "metadata",
         startIndex: 1,
         endIndex: 2,
       }),
@@ -32,7 +38,7 @@ test("ArtEngine", async () => {
       new ItemAttributesRenderer({
         name: (itemUid) => `Ape ${itemUid}`,
         description: (attributes) => {
-          return `This is a token with ${attributes["Background"][0]} as a Background`;
+          return `This is a token with as a Background`;
         },
       }),
       new ImageLayersRenderer({
@@ -62,5 +68,5 @@ test("ArtEngine", async () => {
   });
 
   await ae.run();
-  ae.printPerformance();
+  // ae.printPerformance();
 });
