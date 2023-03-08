@@ -122,15 +122,9 @@ export class SolMetadataExporter implements ExporterInterface {
         creators: this.creators,
       };
 
-      fs.writeFile(
+      fs.writeFileSync(
         path.join(this.metadataPath, `${itemUid}.json`),
         JSON.stringify(metadata, null, 2),
-        (err) => {
-          if (err) {
-            console.error(err);
-            return;
-          }
-        }
       );
     }
   }

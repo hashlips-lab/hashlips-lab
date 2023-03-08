@@ -53,15 +53,9 @@ export class ImagesExporter implements ExporterInterface {
         throw new Error(`Could not find any supported attributes`);
       }
 
-      fs.copyFile(
+      fs.copyFileSync(
         image?.data.path,
         path.join(this.imagesPath, `${attributes?.data.dna[0]}.png`),
-        (err) => {
-          if (err) {
-            console.error(err);
-            return;
-          }
-        }
       );
     }
   }
