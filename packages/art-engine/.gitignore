@@ -1,5 +1,6 @@
 test/data/cache
 test/data/output
+test/data/
 
 dist
 LICENSE
