@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "test": "jest",
-    "build": "cp ../../LICENSE . && tsc",
+    "build": "rm -rf ./dist && cp ../../LICENSE . && tsc",
     "watch": "tsc --watch",
     "lint": "TIMING=1 eslint \"**/*.ts*\""
   },
