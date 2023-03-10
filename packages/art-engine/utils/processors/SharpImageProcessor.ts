@@ -1,6 +1,12 @@
 import ImageProcessorInterface from "../../interfaces/renderers/ImageProcessorInterface";
 import sharp from "sharp";
 
+interface SharpCompositeLayer {
+  input: string;
+  left: number;
+  top: number;
+}
+
 export class SharpImageProcessor implements ImageProcessorInterface {
   public async createImageWithLayers(createImageWithLayersProps: {
     width: number;
@@ -14,15 +20,11 @@ export class SharpImageProcessor implements ImageProcessorInterface {
       zOffset: number;
     }[];
   }): Promise<void> {
-    let normalizedAssets: any = [];
-
-    for (const asset of createImageWithLayersProps.assets) {
-      normalizedAssets.push({
-        input: asset.path,
-        left: Number(asset.xOffset),
-        top: Number(asset.yOffset),
-      });
-    }
+    let normalizedAssets: SharpCompositeLayer[] = createImageWithLayersProps.assets.map(asset => ({
+      input: asset.path,
+      left: asset.xOffset,
+      top: asset.yOffset,
+    }));
 
     await sharp({
       create: {
