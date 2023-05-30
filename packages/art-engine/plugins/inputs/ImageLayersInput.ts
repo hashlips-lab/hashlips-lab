@@ -168,7 +168,7 @@ export class ImageLayersInput
     if (fs.existsSync(edgeCasesPath)) {
       for (const fileName of this.readDir(edgeCasesPath)) {
         const currentFilePath = path.join(edgeCasesPath, fileName);
-        if (!fs.statSync(currentFilePath).isDirectory()) {
+        if (fs.statSync(currentFilePath).isDirectory()) {
           for (const fileNameSub of this.readDir(currentFilePath)) {
             this.addAssetToOptions(
               options,
@@ -177,7 +177,7 @@ export class ImageLayersInput
               layerName
             );
           }
-        } else if (!fs.statSync(currentFilePath).isFile()) {
+        } else if (fs.statSync(currentFilePath).isFile()) {
           this.addAssetToOptions(options, fileName, edgeCasesPath, layerName);
         }
       }
