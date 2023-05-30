@@ -168,35 +168,51 @@ export class ImageLayersInput
     if (fs.existsSync(edgeCasesPath)) {
       for (const fileName of this.readDir(edgeCasesPath)) {
         const currentFilePath = path.join(edgeCasesPath, fileName);
-
-        if (!fs.statSync(currentFilePath).isFile()) {
-          continue;
+        if (!fs.statSync(currentFilePath).isDirectory()) {
+          for (const fileNameSub of this.readDir(currentFilePath)) {
+            this.addAssetToOptions(
+              options,
+              fileNameSub,
+              currentFilePath,
+              layerName
+            );
+          }
+        } else if (!fs.statSync(currentFilePath).isFile()) {
+          this.addAssetToOptions(options, fileName, edgeCasesPath, layerName);
         }
-
-        const params = this.getParams(fileName);
-        const stats = fs.statSync(currentFilePath);
-        const edgeCaseUid = `${params.t}${EDGE_CASE_UID_SEPARATOR}${params.v}`;
-
-        if (options[params.name].edgeCases[edgeCaseUid] === undefined) {
-          options[params.name].edgeCases[edgeCaseUid] = {
-            matchingTrait: params.t ?? "",
-            matchingValue: params.v ?? "",
-            assets: [],
-          };
-        }
-
-        options[params.name].edgeCases[edgeCaseUid].assets.push({
-          path: path.join(layerName, "edge-cases", fileName),
-          relativeXOffset: params.x,
-          relativeYOffset: params.y,
-          relativeZOffset: params.z,
-          lastModifiedTime: stats.mtime.getTime(),
-          size: stats.size,
-        });
       }
     }
 
     return options;
+  }
+
+  private addAssetToOptions(
+    options: Options,
+    fileName: string,
+    pathName: string,
+    layerName: string
+  ) {
+    const currentFilePath = path.join(pathName, fileName);
+    const params = this.getParams(fileName);
+    const stats = fs.statSync(currentFilePath);
+    const edgeCaseUid = `${params.t}${EDGE_CASE_UID_SEPARATOR}${params.v}`;
+
+    if (options[params.name].edgeCases[edgeCaseUid] === undefined) {
+      options[params.name].edgeCases[edgeCaseUid] = {
+        matchingTrait: params.t ?? "",
+        matchingValue: params.v ?? "",
+        assets: [],
+      };
+    }
+
+    options[params.name].edgeCases[edgeCaseUid].assets.push({
+      path: path.join(layerName, "edge-cases", fileName),
+      relativeXOffset: params.x,
+      relativeYOffset: params.y,
+      relativeZOffset: params.z,
+      lastModifiedTime: stats.mtime.getTime(),
+      size: stats.size,
+    });
   }
 
   private readDir(dir: string) {
