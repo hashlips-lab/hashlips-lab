@@ -168,32 +168,61 @@ export class ImageLayersInput
     if (fs.existsSync(edgeCasesPath)) {
       for (const fileName of this.readDir(edgeCasesPath)) {
         const currentFilePath = path.join(edgeCasesPath, fileName);
-
-        if (!fs.statSync(currentFilePath).isFile()) {
-          continue;
+        if (fs.statSync(currentFilePath).isDirectory()) {
+          for (const fileNameSub of this.readDir(currentFilePath)) {
+            this.addAssetToOptions(
+              options,
+              fileNameSub,
+              currentFilePath,
+              path.join(layerName, "edge-cases", fileName, fileNameSub),
+              true
+            );
+          }
+        } else if (fs.statSync(currentFilePath).isFile()) {
+          this.addAssetToOptions(
+            options,
+            fileName,
+            edgeCasesPath,
+            path.join(layerName, "edge-cases", fileName),
+            false
+          );
         }
-
-        const params = this.getParams(fileName);
-        const stats = fs.statSync(currentFilePath);
-        const edgeCaseUid = `${params.t}${EDGE_CASE_UID_SEPARATOR}${params.v}`;
-
-        if (options[params.name].edgeCases[edgeCaseUid] === undefined) {
-          options[params.name].edgeCases[edgeCaseUid] = {
-            matchingTrait: params.t ?? "",
-            matchingValue: params.v ?? "",
-            assets: [],
-          };
-        }
-
-        options[params.name].edgeCases[edgeCaseUid].assets.push({
-          path: path.join(layerName, "edge-cases", fileName),
-          relativeXOffset: params.x,
-          relativeYOffset: params.y,
-          relativeZOffset: params.z,
-          lastModifiedTime: stats.mtime.getTime(),
-          size: stats.size,
-        });
       }
+    }
+    return options;
+  }
+
+  private addAssetToOptions(
+    options: Options,
+    fileName: string,
+    fullPath: string,
+    localPath: string,
+    isFolder: boolean
+  ): Options {
+    const paramsFile = this.getParams(fileName);
+    const paramsPath = this.getParams(localPath);
+    const trait = isFolder ? paramsPath.t : paramsFile.t;
+    const value = isFolder ? paramsPath.v?.split("/")[0] : paramsFile.v;
+    const stats = fs.statSync(path.join(fullPath, fileName));
+    const edgeCaseUid = `${trait}${EDGE_CASE_UID_SEPARATOR}${value}`;
+
+    if (options[paramsFile.name] !== undefined) {
+      if (options[paramsFile.name].edgeCases[edgeCaseUid] === undefined) {
+        options[paramsFile.name].edgeCases[edgeCaseUid] = {
+          matchingTrait: trait ?? "",
+          matchingValue: value ?? "",
+          assets: [],
+        };
+      }
+
+      options[paramsFile.name].edgeCases[edgeCaseUid].assets.push({
+        path: localPath,
+        relativeXOffset: isFolder ? paramsPath.x : paramsFile.x,
+        relativeYOffset: isFolder ? paramsPath.y : paramsFile.y,
+        relativeZOffset: isFolder ? paramsPath.z : paramsFile.z,
+        lastModifiedTime: stats.mtime.getTime(),
+        size: stats.size,
+      });
     }
 
     return options;
