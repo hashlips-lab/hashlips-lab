@@ -1,0 +1,76 @@
+{
+  "seed": "94dee2f2f0830ac06007693fb50d031380d9560577110602600f616cf280426e995a742590ea72f256febba53a0c61193c7cc37d7c714b302ef2f7e53c72d16cdb2a0ed565950428d65eeeb5848305b9ad62fbef7f0e79e92b414c438758bb3781740db1db7e2552aa1951a38093d515db9a5313eedaeb97272279e0c1fb0ff9",
+  "data": {
+    "1": [
+      {
+        "kind": "ItemAttributesGeneratorInterface@v1",
+        "data": {
+          "dna": "7e1280f9685f6b9bd3883fbc75453b58657cdec0",
+          "attributes": {
+            "Background": "Blue",
+            "Body": "Green",
+            "Clothing": "Eye suite",
+            "Face": "Robot Face",
+            "Prop": "Backpack"
+          }
+        }
+      },
+      {
+        "kind": "ImageLayersGeneratorInterface@v1",
+        "data": {
+          "assets": [
+            {
+              "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Background__z10/Blue__w5.png",
+              "latestModifiedTimestamp": 1688869359527,
+              "xOffset": 0,
+              "yOffset": 0,
+              "zOffset": 10
+            },
+            {
+              "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Body__z20/Green__w10.png",
+              "latestModifiedTimestamp": 1688869359541,
+              "xOffset": 0,
+              "yOffset": 0,
+              "zOffset": 20
+            },
+            {
+              "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Clothing__z30/Eye suite__w10.png",
+              "latestModifiedTimestamp": 1688869359565,
+              "xOffset": 0,
+              "yOffset": 0,
+              "zOffset": 30
+            },
+            {
+              "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Face__z40/Robot Face__w20.png",
+              "latestModifiedTimestamp": 1688869359569,
+              "xOffset": 0,
+              "yOffset": 0,
+              "zOffset": 40
+            },
+            {
+              "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Face__z40/Robot Face__z-15.png",
+              "latestModifiedTimestamp": 1688869359569,
+              "xOffset": 0,
+              "yOffset": 0,
+              "zOffset": 25
+            },
+            {
+              "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Prop__z50/Backpack.png",
+              "latestModifiedTimestamp": 1688869359571,
+              "xOffset": 0,
+              "yOffset": 0,
+              "zOffset": 50
+            },
+            {
+              "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Prop__z50/Backpack__z-35__w10.png",
+              "latestModifiedTimestamp": 1688869359572,
+              "xOffset": 0,
+              "yOffset": 0,
+              "zOffset": 15
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

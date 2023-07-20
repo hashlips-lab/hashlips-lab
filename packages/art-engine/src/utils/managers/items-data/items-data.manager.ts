@@ -17,12 +17,16 @@ export default class ItemsDataManager {
     this.itemsRenders = {};
   }
 
-  public freezeAttributes(): void {
+  public freezeAttributes(): ItemsDataType {
     this.areAttributesReadOnlyMode = true;
+
+    return this.itemsAttributes;
   }
 
-  public freezeRenders(): void {
+  public freezeRenders(): ItemsDataType {
     this.areRendersReadOnlyMode = true;
+
+    return this.itemsRenders;
   }
 
   public getAttributes(): ItemsDataManager["itemsAttributes"] {

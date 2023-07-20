@@ -1,14 +1,14 @@
 {
-  "description": "This is a token with Navy Blue as a Background",
-  "image": "ipfs://CID/23ca8de45418092d8dcd4522cd66862c6aeaf6c2.png",
+  "description": "This is a token with Blue as a Background",
+  "image": "ipfs://CID/7e1280f9685f6b9bd3883fbc75453b58657cdec0.png",
   "name": "Ape 1",
-  "dna": "23ca8de45418092d8dcd4522cd66862c6aeaf6c2",
+  "dna": "7e1280f9685f6b9bd3883fbc75453b58657cdec0",
   "uid": "1",
   "generator": "HashLips Lab AE 2.0",
   "attributes": [
     {
       "trait_type": "Background",
-      "value": "Navy Blue"
+      "value": "Blue"
     },
     {
       "trait_type": "Body",
@@ -16,11 +16,11 @@
     },
     {
       "trait_type": "Clothing",
-      "value": "Camo"
+      "value": "Eye suite"
     },
     {
       "trait_type": "Face",
-      "value": "Old Face"
+      "value": "Robot Face"
     },
     {
       "trait_type": "Prop",

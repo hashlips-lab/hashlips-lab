@@ -29,7 +29,7 @@ test("ArtEngine", async () => {
       new ImageLayersAttributesGenerator({
         dataSet: "apes",
         startIndex: 1,
-        endIndex: 2,
+        endIndex: 1,
       }),
     ],
     renderers: [

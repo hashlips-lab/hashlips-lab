@@ -1,6 +1,3 @@
-import * as fs from "fs";
-import * as path from "path";
-import * as crypto from "crypto";
 import InputInterface from "./src/common/inputs/input.interface";
 import GeneratorInterface from "./src/common/generators/generator.interface";
 import RendererInterface from "./src/common/renderers/renderer.interface";
@@ -10,6 +7,14 @@ import ItemsDataManager from "./src/utils/managers/items-data/items-data.manager
 import PerformanceLogger from "./src/utils/loggers/performance/performance.logger";
 import HeroLogger from "./src/utils/loggers/hero/hero.logger";
 import PackageJson from "./package.json";
+import CacheManager from "./src/utils/managers/cache/cache.manager";
+
+import {
+  ATTRIBUTES_CACHE_FILE,
+  CONFIG_CACHE_FILE,
+  INPUTS_CACHE_FILE,
+  RENDERS_CACHE_FILE,
+} from "./src/utils/managers/cache/cache.constants";
 
 PerformanceLogger.enable();
 HeroLogger.enable();
@@ -23,11 +28,9 @@ type Config = {
   outputPath: string;
 };
 
-const SEED_CACHE_FILE = "seed.json";
-
 export default class ArtEngine {
   private config: Config;
-  private seed?: string;
+  private cacheManager: CacheManager;
   private inputsManager: InputsManager;
   private itemsDataManager: ItemsDataManager;
 
@@ -35,24 +38,27 @@ export default class ArtEngine {
     this.config = config;
     this.inputsManager = new InputsManager();
     this.itemsDataManager = new ItemsDataManager();
+    this.cacheManager = new CacheManager(this.config.cachePath);
+
+    this.cacheManager.init();
     HeroLogger.printHero(PackageJson.version);
   }
 
   private async load() {
     const timerUid = PerformanceLogger.trackTask("Loading inputs");
-    this.initCache();
+    this.cacheManager.saveDataToCache(CONFIG_CACHE_FILE, this.config);
 
     for (const key in this.config.inputs) {
       const input = this.config.inputs[key];
 
-      await input.init({ seed: this.seed! });
+      await input.init({ seed: this.cacheManager.seed });
       this.inputsManager.set(key, await input.load());
     }
 
-    this.inputsManager.freeze();
+    const frozenInputsData = this.inputsManager.freeze();
 
-    // TODO: implement cache
-    //this.cache("input.json", this.inputs);
+    this.cacheManager.saveDataToCache(INPUTS_CACHE_FILE, frozenInputsData);
+
     PerformanceLogger.endTask(timerUid);
   }
 
@@ -61,7 +67,7 @@ export default class ArtEngine {
 
     for (const generator of this.config.generators) {
       await generator.init({
-        seed: this.seed!,
+        seed: this.cacheManager.seed,
         inputsManager: this.inputsManager,
       });
 
@@ -72,7 +78,13 @@ export default class ArtEngine {
       }
     }
 
-    this.itemsDataManager.freezeAttributes();
+    const frozenAttributesData = this.itemsDataManager.freezeAttributes();
+
+    this.cacheManager.saveDataToCache(
+      ATTRIBUTES_CACHE_FILE,
+      frozenAttributesData
+    );
+
     PerformanceLogger.endTask(timerUid);
   }
 
@@ -81,7 +93,7 @@ export default class ArtEngine {
 
     for (const renderer of this.config.renderers) {
       await renderer.init({
-        seed: this.seed!,
+        seed: this.cacheManager.seed,
         cachePath: this.config.cachePath,
         attributesGetter: () => this.itemsDataManager.getAttributes(),
       });
@@ -93,7 +105,10 @@ export default class ArtEngine {
       }
     }
 
-    this.itemsDataManager.freezeRenders();
+    const frozenRendersData = this.itemsDataManager.freezeRenders();
+
+    this.cacheManager.saveDataToCache(RENDERS_CACHE_FILE, frozenRendersData);
+
     PerformanceLogger.endTask(timerUid);
   }
 
@@ -102,7 +117,7 @@ export default class ArtEngine {
 
     for (const exporter of this.config.exporters) {
       await exporter.init({
-        seed: this.seed!,
+        seed: this.cacheManager.seed,
         outputPath: this.config.outputPath,
         rendersGetter: () => this.itemsDataManager.getRenders(),
       });
@@ -127,34 +142,5 @@ export default class ArtEngine {
   public printPerformance() {
     PerformanceLogger.printRecap();
     PerformanceLogger.printIncompleteTasks();
-  }
-
-  private initCache(): void {
-    if (this.seed !== undefined) {
-      return;
-    }
-
-    if (!fs.existsSync(this.config.cachePath)) {
-      fs.mkdirSync(this.config.cachePath);
-    }
-
-    const seedFilePath = this.getCachePath(SEED_CACHE_FILE);
-    if (fs.existsSync(seedFilePath)) {
-      this.seed = JSON.parse(fs.readFileSync(seedFilePath).toString()).seed;
-
-      return;
-    }
-
-    const newSeed = crypto.randomBytes(128).toString("hex"); // 256 random chars
-    const seedFileDir = path.dirname(seedFilePath);
-
-    fs.mkdirSync(seedFileDir, { recursive: true });
-    fs.writeFileSync(seedFilePath, JSON.stringify({ seed: newSeed }, null, 2));
-
-    this.seed = newSeed;
-  }
-
-  private getCachePath(relativePath: string): string {
-    return path.join(this.config.cachePath, relativePath);
   }
 }

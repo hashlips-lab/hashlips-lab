@@ -11,8 +11,10 @@ export default class InputsManager {
     this.inputsData = {};
   }
 
-  public freeze(): void {
+  public freeze(): { [key: string]: InputDataType } {
     this.isReadOnlyMode = true;
+
+    return this.inputsData;
   }
 
   public get(key: string): InputDataType {
