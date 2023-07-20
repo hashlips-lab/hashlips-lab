@@ -1,0 +1,30 @@
+{
+  "description": "This is a token with Orange as a Background",
+  "image": "ipfs://CID/846e5cb42094324a10c138467398de79b311c255.png",
+  "name": "Ape 2",
+  "dna": "846e5cb42094324a10c138467398de79b311c255",
+  "uid": "2",
+  "generator": "HashLips Lab AE 2.0",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Orange"
+    },
+    {
+      "trait_type": "Body",
+      "value": "Grey"
+    },
+    {
+      "trait_type": "Clothing",
+      "value": "Eye suite"
+    },
+    {
+      "trait_type": "Face",
+      "value": "Robot Face"
+    },
+    {
+      "trait_type": "Prop",
+      "value": "Backpack"
+    }
+  ]
+}

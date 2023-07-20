@@ -1,0 +1,42 @@
+{
+  "description": "This is a token with Blue as a Background",
+  "image": "ipfs://CID/8c35bf45a3336d1f30e2af22f45242bf7aed7705.png",
+  "name": "Ape 1",
+  "dna": "8c35bf45a3336d1f30e2af22f45242bf7aed7705",
+  "uid": "1",
+  "symbol": "APES",
+  "seller_fee_basis_points": 200,
+  "generator": "HashLips Lab AE 2.0",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Blue"
+    },
+    {
+      "trait_type": "Body",
+      "value": "Grey"
+    },
+    {
+      "trait_type": "Clothing",
+      "value": "Eye suite"
+    },
+    {
+      "trait_type": "Face",
+      "value": "Robot Face"
+    },
+    {
+      "trait_type": "Prop",
+      "value": "Backpack"
+    }
+  ],
+  "collection": {
+    "name": "The Apes",
+    "family": ""
+  },
+  "creators": [
+    {
+      "address": "xEtQ9Fpv62qdc1GYfpNReMasVTe9YW5bHJwfVKqo72u",
+      "share": 100
+    }
+  ]
+}

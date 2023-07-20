@@ -1,28 +1,28 @@
-export { default as ArtEngine } from "./ArtEngine";
+export { default as ArtEngine } from "./art-engine";
 
-import { ImageLayersInput } from "./plugins/inputs/ImageLayersInput";
+import { ImageLayersInput } from "./src/plugins/inputs/image-layers/image-layers.input";
 
 export const inputs = {
   ImageLayersInput,
 };
 
-import { ImageLayersAttributesGenerator } from "./plugins/generators/ImageLayersAttributesGenerator";
+import { ImageLayersAttributesGenerator } from "./src/plugins/generators/image-layers-attributes/image-layers-attributes.generator";
 
 export const generators = {
   ImageLayersAttributesGenerator,
 };
 
-import { ItemAttributesRenderer } from "./plugins/renderers/ItemAttributesRenderer";
-import { ImageLayersRenderer } from "./plugins/renderers/ImageLayersRenderer";
+import { ItemAttributesRenderer } from "./src/plugins/renderers/item-attributes/item-attributes.renderer";
+import { ImageLayersRenderer } from "./src/plugins/renderers/image-layers/image-layers.renderer";
 
 export const renderers = {
   ItemAttributesRenderer,
   ImageLayersRenderer,
 };
 
-import { ImagesExporter } from "./plugins/exporters/ImagesExporter";
-import { Erc721MetadataExporter } from "./plugins/exporters/Erc721MetadataExporter";
-import { SolMetadataExporter } from "./plugins/exporters/SolMetadataExporter";
+import { ImagesExporter } from "./src/plugins/exporters/images/images.exporter";
+import { Erc721MetadataExporter } from "./src/plugins/exporters/erc721-metadata/erc721-metadata.exporter";
+import { SolMetadataExporter } from "./src/plugins/exporters/sol-metadata/sol-metadata.exporter";
 
 export const exporters = {
   ImagesExporter,
