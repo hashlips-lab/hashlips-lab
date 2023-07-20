@@ -1,22 +1,22 @@
 {
-  "description": "This is a token with Orange as a Background",
-  "image": "ipfs://CID/846e5cb42094324a10c138467398de79b311c255.png",
+  "description": "This is a token with Navy Blue as a Background",
+  "image": "ipfs://CID/0713158ed845a388d36037ed2fae29f1ea1d3b14.png",
   "name": "Ape 2",
-  "dna": "846e5cb42094324a10c138467398de79b311c255",
+  "dna": "0713158ed845a388d36037ed2fae29f1ea1d3b14",
   "uid": "2",
   "generator": "HashLips Lab AE 2.0",
   "attributes": [
     {
       "trait_type": "Background",
-      "value": "Orange"
+      "value": "Navy Blue"
     },
     {
       "trait_type": "Body",
-      "value": "Grey"
+      "value": "Robot"
     },
     {
       "trait_type": "Clothing",
-      "value": "Eye suite"
+      "value": "Santa"
     },
     {
       "trait_type": "Face",

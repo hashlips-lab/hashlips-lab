@@ -1,4 +1,4 @@
-import ArtEngine from "../ArtEngine";
+import ArtEngine from "../art-engine";
 
 import { ImageLayersInput } from "../src/plugins/inputs/image-layers/image-layers.input";
 
