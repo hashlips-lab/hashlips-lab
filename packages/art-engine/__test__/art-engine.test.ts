@@ -20,8 +20,12 @@ test("ArtEngine", async () => {
   const ae = new ArtEngine({
     cachePath: `${BASE_PATH}/data/cache`,
     outputPath: `${BASE_PATH}/data/output`,
+    useCache: true,
     inputs: {
       apes: new ImageLayersInput({
+        assetsBasePath: `${BASE_PATH}/data/layers`,
+      }),
+      cats: new ImageLayersInput({
         assetsBasePath: `${BASE_PATH}/data/layers`,
       }),
     },
@@ -29,7 +33,12 @@ test("ArtEngine", async () => {
       new ImageLayersAttributesGenerator({
         dataSet: "apes",
         startIndex: 1,
-        endIndex: 1,
+        endIndex: 3,
+      }),
+      new ImageLayersAttributesGenerator({
+        dataSet: "cats",
+        startIndex: 4,
+        endIndex: 6,
       }),
     ],
     renderers: [
@@ -48,7 +57,7 @@ test("ArtEngine", async () => {
     exporters: [
       new ImagesExporter(),
       new Erc721MetadataExporter({
-        imageUriPrefix: "ipfs://CID/",
+        imageUriPrefix: "ipfs://Update/",
       }),
       new SolMetadataExporter({
         imageUriPrefix: "ipfs://CID/",

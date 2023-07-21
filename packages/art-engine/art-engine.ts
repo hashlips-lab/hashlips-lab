@@ -13,7 +13,9 @@ import {
   ATTRIBUTES_CACHE_FILE,
   CONFIG_CACHE_FILE,
   INPUTS_CACHE_FILE,
+  PREV_HASHES_CACHE_FILE,
   RENDERS_CACHE_FILE,
+  RENDERS_TEMP_CACHE_DIR,
 } from "./src/utils/managers/cache/cache.constants";
 
 PerformanceLogger.enable();
@@ -26,6 +28,7 @@ type Config = {
   exporters: ExporterInterface[];
   cachePath: string;
   outputPath: string;
+  useCache: boolean;
 };
 
 export default class ArtEngine {
@@ -42,72 +45,146 @@ export default class ArtEngine {
 
     this.cacheManager.init();
     HeroLogger.printHero(PackageJson.version);
+
+    this.cacheManager.saveDataToCacheFile(CONFIG_CACHE_FILE, this.config);
+    console.log("Cache hashes before run", this.cacheManager.hashes);
   }
 
   private async load() {
     const timerUid = PerformanceLogger.trackTask("Loading inputs");
-    this.cacheManager.saveDataToCache(CONFIG_CACHE_FILE, this.config);
+    const cachedData = this.cacheManager.getDataFromCache(INPUTS_CACHE_FILE);
+
+    const cacheHashes = this.cacheManager.hashes;
 
     for (const key in this.config.inputs) {
       const input = this.config.inputs[key];
 
-      await input.init({ seed: this.cacheManager.seed });
-      this.inputsManager.set(key, await input.load());
+      if (
+        this.config.useCache &&
+        cachedData &&
+        cacheHashes.config.curr === cacheHashes.config.prev &&
+        cacheHashes.inputs.curr === cacheHashes.inputs.prev
+      ) {
+        console.log("Loading from cache...");
+        this.inputsManager.set(key, cachedData[key]);
+      } else {
+        console.log("Loading...");
+        await input.init({ seed: this.cacheManager.seed });
+        this.inputsManager.set(key, await input.load());
+      }
     }
 
     const frozenInputsData = this.inputsManager.freeze();
 
-    this.cacheManager.saveDataToCache(INPUTS_CACHE_FILE, frozenInputsData);
+    this.cacheManager.saveDataToCacheFile(INPUTS_CACHE_FILE, frozenInputsData);
+
+    const currInputHash =
+      this.cacheManager.generateCacheFileOrFolderHash(INPUTS_CACHE_FILE);
+
+    this.cacheManager.updateCurrCacheHashAtKey("inputs", currInputHash);
 
     PerformanceLogger.endTask(timerUid);
   }
 
   private async generate() {
     const timerUid = PerformanceLogger.trackTask("Generating");
+    const cachedData = this.cacheManager.getDataFromCache(
+      ATTRIBUTES_CACHE_FILE
+    );
+
+    const cacheHashes = this.cacheManager.hashes;
 
     for (const generator of this.config.generators) {
-      await generator.init({
-        seed: this.cacheManager.seed,
-        inputsManager: this.inputsManager,
-      });
+      if (
+        this.config.useCache &&
+        cachedData &&
+        cacheHashes.inputs.curr === cacheHashes.inputs.prev &&
+        cacheHashes.generators.curr === cacheHashes.generators.prev
+      ) {
+        console.log("Generating from cache...");
+        this.itemsDataManager.addManyAttributes(cachedData);
+      } else {
+        console.log("Generating...");
+        await generator.init({
+          seed: this.cacheManager.seed,
+          inputsManager: this.inputsManager,
+        });
 
-      const itemsAttributes = await generator.generate();
+        const itemsAttributes = await generator.generate();
 
-      for (const itemUid in itemsAttributes) {
-        this.itemsDataManager.addAttributes(itemUid, itemsAttributes[itemUid]);
+        for (const itemUid in itemsAttributes) {
+          this.itemsDataManager.addAttributes(
+            itemUid,
+            itemsAttributes[itemUid]
+          );
+        }
       }
     }
 
     const frozenAttributesData = this.itemsDataManager.freezeAttributes();
 
-    this.cacheManager.saveDataToCache(
+    this.cacheManager.saveDataToCacheFile(
       ATTRIBUTES_CACHE_FILE,
       frozenAttributesData
     );
+
+    const currHash = this.cacheManager.generateCacheFileOrFolderHash(
+      ATTRIBUTES_CACHE_FILE
+    );
+
+    this.cacheManager.updateCurrCacheHashAtKey("generators", currHash);
 
     PerformanceLogger.endTask(timerUid);
   }
 
   private async render() {
     const timerUid = PerformanceLogger.trackTask("Rendering");
+    const cachedData = this.cacheManager.getDataFromCache(RENDERS_CACHE_FILE);
+
+    const cacheHashes = this.cacheManager.hashes;
 
     for (const renderer of this.config.renderers) {
-      await renderer.init({
-        seed: this.cacheManager.seed,
-        cachePath: this.config.cachePath,
-        attributesGetter: () => this.itemsDataManager.getAttributes(),
-      });
+      if (
+        this.config.useCache &&
+        cachedData &&
+        cacheHashes.generators.curr === cacheHashes.generators.prev &&
+        cacheHashes.renderers.curr === cacheHashes.renderers.prev &&
+        cacheHashes.renderers_temp.curr === cacheHashes.renderers_temp.prev
+      ) {
+        console.log("Rendering from cache...");
+        this.itemsDataManager.addManyRenders(cachedData);
+      } else {
+        console.log("Rendering...");
+        await renderer.init({
+          seed: this.cacheManager.seed,
+          cachePath: this.config.cachePath,
+          attributesGetter: () => this.itemsDataManager.getAttributes(),
+        });
 
-      const itemsRenders = await renderer.render();
+        const itemsRenders = await renderer.render();
 
-      for (const itemUid in itemsRenders) {
-        this.itemsDataManager.addRenders(itemUid, itemsRenders[itemUid]);
+        for (const itemUid in itemsRenders) {
+          this.itemsDataManager.addRenders(itemUid, itemsRenders[itemUid]);
+        }
       }
     }
 
     const frozenRendersData = this.itemsDataManager.freezeRenders();
 
-    this.cacheManager.saveDataToCache(RENDERS_CACHE_FILE, frozenRendersData);
+    this.cacheManager.saveDataToCacheFile(
+      RENDERS_CACHE_FILE,
+      frozenRendersData
+    );
+
+    const currHash =
+      this.cacheManager.generateCacheFileOrFolderHash(RENDERS_CACHE_FILE);
+
+    const currTempHash = this.cacheManager.generateCacheFileOrFolderHash(
+      RENDERS_TEMP_CACHE_DIR
+    );
+
+    this.cacheManager.updateCurrCacheHashAtKey("renderers", currHash);
+    this.cacheManager.updateCurrCacheHashAtKey("renderers_temp", currTempHash);
 
     PerformanceLogger.endTask(timerUid);
   }
@@ -116,26 +193,35 @@ export default class ArtEngine {
     const timerUid = PerformanceLogger.trackTask("Exporting");
 
     for (const exporter of this.config.exporters) {
-      await exporter.init({
-        seed: this.cacheManager.seed,
-        outputPath: this.config.outputPath,
-        rendersGetter: () => this.itemsDataManager.getRenders(),
-      });
+      if (!exporter.skip()) {
+        console.log("Exporting...");
+        await exporter.init({
+          seed: this.cacheManager.seed,
+          outputPath: this.config.outputPath,
+          rendersGetter: () => this.itemsDataManager.getRenders(),
+        });
 
-      await exporter.export();
+        await exporter.export();
+      } else {
+        console.log("Export skipped");
+      }
     }
+
     PerformanceLogger.endTask(timerUid);
   }
 
   public async run(): Promise<void> {
-    console.log("Loading data...");
     await this.load();
-    console.log("Generating...");
     await this.generate();
-    console.log("Rendering...");
     await this.render();
-    console.log("Exporting...");
     await this.export();
+
+    this.cacheManager.syncCacheHashes();
+    this.cacheManager.saveDataToCacheFile(
+      PREV_HASHES_CACHE_FILE,
+      this.cacheManager.hashes
+    );
+    console.log("Cache hashes after run", this.cacheManager.hashes);
     console.log("Done");
   }
 

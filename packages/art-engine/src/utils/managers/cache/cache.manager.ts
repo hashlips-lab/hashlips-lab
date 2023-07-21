@@ -2,12 +2,50 @@ import * as fs from "fs";
 import * as path from "path";
 import * as crypto from "crypto";
 
-import { SEED_CACHE_FILE } from "./cache.constants";
+import {
+  ATTRIBUTES_CACHE_FILE,
+  CONFIG_CACHE_FILE,
+  INPUTS_CACHE_FILE,
+  PREV_HASHES_CACHE_FILE,
+  RENDERS_CACHE_FILE,
+  RENDERS_TEMP_CACHE_DIR,
+  SEED_CACHE_FILE,
+} from "./cache.constants";
+
+type HashType = {
+  curr: string;
+  prev: string;
+};
 
 export default class CacheManager {
   public seed!: string;
+  public hashes: { [key: string]: HashType };
 
-  constructor(private cachePath: string) {}
+  constructor(private cachePath: string) {
+    this.hashes = {
+      config: {
+        curr: this.generateCacheFileOrFolderHash(CONFIG_CACHE_FILE),
+        prev: "",
+      },
+      inputs: {
+        curr: this.generateCacheFileOrFolderHash(INPUTS_CACHE_FILE),
+        prev: "",
+      },
+      generators: {
+        curr: this.generateCacheFileOrFolderHash(ATTRIBUTES_CACHE_FILE),
+        prev: "",
+      },
+      renderers: {
+        curr: this.generateCacheFileOrFolderHash(RENDERS_CACHE_FILE),
+        prev: "",
+      },
+      renderers_temp: {
+        curr: this.generateCacheFileOrFolderHash(RENDERS_TEMP_CACHE_DIR),
+        prev: "",
+      },
+    };
+    this.loadCacheHashes();
+  }
 
   public init(): void {
     if (this.seed !== undefined) {
@@ -34,14 +72,80 @@ export default class CacheManager {
     this.seed = newSeed;
   }
 
+  private loadCacheHashes(): void {
+    let prevCachePath = this.getCachePath(PREV_HASHES_CACHE_FILE);
+    if (fs.existsSync(prevCachePath)) {
+      const prevHashes = JSON.parse(fs.readFileSync(prevCachePath).toString());
+      this.hashes.config.prev = prevHashes.config?.curr;
+      this.hashes.inputs.prev = prevHashes.inputs?.curr;
+      this.hashes.generators.prev = prevHashes.generators?.curr;
+      this.hashes.renderers.prev = prevHashes.renderers?.curr;
+      this.hashes.renderers_temp.prev = prevHashes.renderers_temp?.curr;
+    }
+  }
+
+  public syncCacheHashes(): void {
+    for (const key in this.hashes) {
+      this.hashes[key].prev = this.hashes[key].curr;
+    }
+  }
+
+  public generateCacheFileOrFolderHash(relativePath: string): string {
+    let fileOrFolderPath = path.join(this.cachePath, relativePath);
+    return this.computeFileOrFolderHash(fileOrFolderPath);
+  }
+
   public getCachePath(relativePath: string): string {
     return path.join(this.cachePath, relativePath);
   }
 
-  public saveDataToCache(relativePath: string, data: any): void {
+  public updateCurrCacheHashAtKey(key: string, hash: string) {
+    this.hashes[key].curr = hash;
+  }
+
+  public saveDataToCacheFile(relativePath: string, data: any): void {
     fs.writeFileSync(
       this.getCachePath(relativePath),
-      JSON.stringify({ seed: this.seed, data: data }, null, 2)
+      JSON.stringify(data, null, 2)
     );
+  }
+
+  private computeFileHash(filePath: string): string {
+    const fileData = fs.readFileSync(filePath);
+    const hash = crypto.createHash("sha256");
+    hash.update(fileData);
+    return hash.digest("hex");
+  }
+
+  private computeFileOrFolderHash(folderPath: string): string {
+    const hash = crypto.createHash("sha256");
+
+    const computeHash = (filePath: string) => {
+      if (!fs.existsSync(filePath)) {
+        return "no cache";
+      }
+      const stats = fs.statSync(filePath);
+
+      if (stats.isFile()) {
+        const fileHash = this.computeFileHash(filePath);
+        hash.update(fileHash);
+      } else if (stats.isDirectory()) {
+        const files = fs.readdirSync(filePath);
+        files.forEach((file) => {
+          const nestedFilePath = path.join(filePath, file);
+          computeHash(nestedFilePath);
+        });
+      }
+    };
+
+    computeHash(folderPath);
+    return hash.digest("hex");
+  }
+
+  public getDataFromCache(relativePath: string): any {
+    let cachePath = this.getCachePath(relativePath);
+    if (fs.existsSync(cachePath)) {
+      return JSON.parse(fs.readFileSync(cachePath).toString());
+    }
   }
 }

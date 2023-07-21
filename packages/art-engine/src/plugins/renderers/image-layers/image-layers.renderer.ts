@@ -14,8 +14,7 @@ import * as fs from "fs";
 import ImageProcessorInterface from "../../../common/processors/image-processor.interface";
 import PerformanceTracker from "../../../utils/loggers/performance/performance.logger";
 import { SharpImageProcessor } from "../../../utils/processors/sharp/sharp-image.processor";
-
-const TEMP_CACHE_DIR = "temp";
+import { RENDERS_TEMP_CACHE_DIR } from "../../../utils/managers/cache/cache.constants";
 
 export class ImageLayersRenderer
   implements RendererInterface<StaticLayeredImagesRendererInterface>
@@ -39,7 +38,7 @@ export class ImageLayersRenderer
 
   public async init(props: RendererInitPropsInterface) {
     this.attributesGetter = props.attributesGetter;
-    this.tempRenderDir = path.join(props.cachePath, TEMP_CACHE_DIR);
+    this.tempRenderDir = path.join(props.cachePath, RENDERS_TEMP_CACHE_DIR);
   }
 
   public async render(): Promise<
@@ -95,7 +94,6 @@ export class ImageLayersRenderer
           kind: STATIC_LAYERED_IMAGES_RENDERER_INTERFACE_V1,
           data: {
             path: outputPath,
-            latestModifiedTimestamp: outputStats.mtime.getTime(),
           },
         },
       ];

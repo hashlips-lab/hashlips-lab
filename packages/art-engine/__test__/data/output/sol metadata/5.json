@@ -1,24 +1,24 @@
 {
-  "description": "This is a token with Blue as a Background",
-  "image": "ipfs://CID/2aeee997d8aa886ae2ea9212f216e2df58d613ea.png",
-  "name": "Ape 1",
-  "dna": "2aeee997d8aa886ae2ea9212f216e2df58d613ea",
-  "uid": "1",
+  "description": "This is a token with Orange as a Background",
+  "image": "ipfs://CID/85879b30ba933f6a6402052518499ccf563cc129.png",
+  "name": "Ape 5",
+  "dna": "85879b30ba933f6a6402052518499ccf563cc129",
+  "uid": "5",
   "symbol": "APES",
   "seller_fee_basis_points": 200,
   "generator": "HashLips Lab AE 2.0",
   "attributes": [
     {
       "trait_type": "Background",
-      "value": "Blue"
+      "value": "Orange"
     },
     {
       "trait_type": "Body",
-      "value": "Green"
+      "value": "Robot"
     },
     {
       "trait_type": "Clothing",
-      "value": "Camo"
+      "value": "Eye suite"
     },
     {
       "trait_type": "Face",

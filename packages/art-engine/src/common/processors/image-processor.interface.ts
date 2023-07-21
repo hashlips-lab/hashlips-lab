@@ -5,7 +5,6 @@ export default interface ImageProcessorInterface {
     outputPath: string;
     assets: {
       path: string;
-      latestModifiedTimestamp: number;
       xOffset: number;
       yOffset: number;
       zOffset: number;

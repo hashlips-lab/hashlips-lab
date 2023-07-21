@@ -9,4 +9,5 @@ export interface ExporterInitPropsInterface {
 export default interface ExporterInterface {
   init: (props: ExporterInitPropsInterface) => Promise<void>;
   export: () => Promise<void>;
+  skip: () => boolean;
 }

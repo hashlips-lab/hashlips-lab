@@ -8,7 +8,6 @@ export class SharpImageProcessor implements ImageProcessorInterface {
     outputPath: string;
     assets: {
       path: string;
-      latestModifiedTimestamp: number;
       xOffset: number;
       yOffset: number;
       zOffset: number;

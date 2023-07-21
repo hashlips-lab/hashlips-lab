@@ -21,6 +21,7 @@ export class SolMetadataExporter implements ExporterInterface {
     address: string;
     share: number;
   }[];
+  private shouldSkip: boolean;
 
   constructor(
     constructorProps: {
@@ -34,6 +35,7 @@ export class SolMetadataExporter implements ExporterInterface {
         address: string;
         share: number;
       }[];
+      skip?: boolean;
     } = {}
   ) {
     this.metadataFolder = constructorProps.metadataFolder ?? "sol metadata";
@@ -44,6 +46,7 @@ export class SolMetadataExporter implements ExporterInterface {
     this.creators = constructorProps.creators ?? [];
     this.imageUriPrefix =
       constructorProps.imageUriPrefix ?? "IMAGE_URI_PREFIX_";
+    this.shouldSkip = constructorProps.skip ?? false;
   }
 
   public async init(props: ExporterInitPropsInterface) {
@@ -105,5 +108,9 @@ export class SolMetadataExporter implements ExporterInterface {
         JSON.stringify(metadata, null, 2)
       );
     }
+  }
+
+  public skip() {
+    return this.shouldSkip;
   }
 }

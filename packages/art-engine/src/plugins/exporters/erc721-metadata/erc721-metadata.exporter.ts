@@ -13,16 +13,19 @@ export class Erc721MetadataExporter implements ExporterInterface {
   private metadataFolder: string;
   private metadataPath!: string;
   private imageUriPrefix: string;
+  private shouldSkip: boolean;
 
   constructor(
     constructorProps: {
       metadataFolder?: string;
       imageUriPrefix?: string;
+      skip?: boolean;
     } = {}
   ) {
     this.metadataFolder = constructorProps.metadataFolder ?? "erc721 metadata";
     this.imageUriPrefix =
       constructorProps.imageUriPrefix ?? "IMAGE_URI_PREFIX_";
+    this.shouldSkip = constructorProps.skip ?? false;
   }
 
   public async init(props: ExporterInitPropsInterface) {
@@ -77,5 +80,9 @@ export class Erc721MetadataExporter implements ExporterInterface {
         JSON.stringify(metadata, null, 2)
       );
     }
+  }
+
+  public skip() {
+    return this.shouldSkip;
   }
 }

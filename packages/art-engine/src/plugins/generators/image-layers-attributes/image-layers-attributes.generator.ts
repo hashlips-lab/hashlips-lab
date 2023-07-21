@@ -113,7 +113,6 @@ export class ImageLayersAttributesGenerator
         itemAssets = itemAssets.concat(
           assets.map((asset) => ({
             path: path.join(this.data.basePath, asset.path),
-            latestModifiedTimestamp: asset.lastModifiedTime,
             xOffset: layer.baseXOffset + asset.relativeXOffset,
             yOffset: layer.baseYOffset + asset.relativeYOffset,
             zOffset: layer.baseZOffset + asset.relativeZOffset,

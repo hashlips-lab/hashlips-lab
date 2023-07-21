@@ -33,6 +33,15 @@ export default class ItemsDataManager {
     return this.itemsAttributes;
   }
 
+  public addManyAttributes(data: ItemsDataType): void {
+    if (this.areAttributesReadOnlyMode) {
+      throw new Error(
+        `Trying to add all attributes data on a frozen ItemsDataManager`
+      );
+    }
+    this.itemsAttributes = { ...this.itemsAttributes, ...data };
+  }
+
   public addAttributes(
     itemUid: string,
     attributes: ItemPropertiesInterface<any>[]
@@ -50,6 +59,15 @@ export default class ItemsDataManager {
 
   public getRenders(): ItemsDataManager["itemsRenders"] {
     return this.itemsRenders;
+  }
+
+  public addManyRenders(data: ItemsDataType): void {
+    if (this.areRendersReadOnlyMode) {
+      throw new Error(
+        `Trying to add all renders data on a frozen ItemsDataManager`
+      );
+    }
+    this.itemsRenders = { ...this.itemsRenders, ...data };
   }
 
   public addRenders(
