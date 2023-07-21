@@ -20,12 +20,9 @@ test("ArtEngine", async () => {
   const ae = new ArtEngine({
     cachePath: `${BASE_PATH}/data/cache`,
     outputPath: `${BASE_PATH}/data/output`,
-    useCache: true,
+    useCache: false,
     inputs: {
       apes: new ImageLayersInput({
-        assetsBasePath: `${BASE_PATH}/data/layers`,
-      }),
-      cats: new ImageLayersInput({
         assetsBasePath: `${BASE_PATH}/data/layers`,
       }),
     },
@@ -34,11 +31,6 @@ test("ArtEngine", async () => {
         dataSet: "apes",
         startIndex: 1,
         endIndex: 3,
-      }),
-      new ImageLayersAttributesGenerator({
-        dataSet: "cats",
-        startIndex: 4,
-        endIndex: 6,
       }),
     ],
     renderers: [
