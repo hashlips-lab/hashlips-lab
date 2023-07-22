@@ -1,7 +1,7 @@
 {
   "cachePath": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/cache",
   "outputPath": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/output",
-  "useCache": true,
+  "useCache": false,
   "inputs": {
     "apes": {
       "assetsBasePath": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers"

@@ -3,137 +3,9 @@
     {
       "kind": "ItemAttributesGeneratorInterface@v1",
       "data": {
-        "dna": "0da83988e8306b97336a101cac0f04bd643fc2d9",
+        "dna": "36f9dffe5bb9476c61a54afc4a935e804e0e871a",
         "attributes": {
-          "Background": "Orange",
-          "Body": "Grey",
-          "Clothing": "Camo",
-          "Face": "Old Face",
-          "Prop": "Backpack"
-        }
-      }
-    },
-    {
-      "kind": "ImageLayersGeneratorInterface@v1",
-      "data": {
-        "assets": [
-          {
-            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Background__z10/Orange__w10.png",
-            "xOffset": 0,
-            "yOffset": 0,
-            "zOffset": 10
-          },
-          {
-            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Body__z20/Grey__w10.png",
-            "xOffset": 0,
-            "yOffset": 0,
-            "zOffset": 20
-          },
-          {
-            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Clothing__z30/Camo__w10.png",
-            "xOffset": 0,
-            "yOffset": 0,
-            "zOffset": 30
-          },
-          {
-            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Face__z40/Old Face__w10.png",
-            "xOffset": 0,
-            "yOffset": 0,
-            "zOffset": 40
-          },
-          {
-            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Face__z40/Old Face__z-15.png",
-            "xOffset": 0,
-            "yOffset": 0,
-            "zOffset": 25
-          },
-          {
-            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Prop__z50/Backpack.png",
-            "xOffset": 0,
-            "yOffset": 0,
-            "zOffset": 50
-          },
-          {
-            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Prop__z50/Backpack__z-35__w10.png",
-            "xOffset": 0,
-            "yOffset": 0,
-            "zOffset": 15
-          }
-        ]
-      }
-    }
-  ],
-  "2": [
-    {
-      "kind": "ItemAttributesGeneratorInterface@v1",
-      "data": {
-        "dna": "27c63a2bfac837a57bcb18d9108b09535c7d210d",
-        "attributes": {
-          "Background": "Blue",
-          "Body": "Robot",
-          "Clothing": "Santa",
-          "Face": "Old Face",
-          "Prop": "Backpack"
-        }
-      }
-    },
-    {
-      "kind": "ImageLayersGeneratorInterface@v1",
-      "data": {
-        "assets": [
-          {
-            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Background__z10/Blue__w5.png",
-            "xOffset": 0,
-            "yOffset": 0,
-            "zOffset": 10
-          },
-          {
-            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Body__z20/Robot__w5.png",
-            "xOffset": 0,
-            "yOffset": 0,
-            "zOffset": 20
-          },
-          {
-            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Clothing__z30/Santa__w10.png",
-            "xOffset": 0,
-            "yOffset": 0,
-            "zOffset": 30
-          },
-          {
-            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Face__z40/Old Face__w10.png",
-            "xOffset": 0,
-            "yOffset": 0,
-            "zOffset": 40
-          },
-          {
-            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Face__z40/Old Face__z-15.png",
-            "xOffset": 0,
-            "yOffset": 0,
-            "zOffset": 25
-          },
-          {
-            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Prop__z50/edge-cases/Backpack__z-35__tClothing__vSanta.png",
-            "xOffset": 0,
-            "yOffset": 0,
-            "zOffset": 15
-          },
-          {
-            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Prop__z50/edge-cases/Backpack__z20__tClothing__vSanta.png",
-            "xOffset": 0,
-            "yOffset": 0,
-            "zOffset": 70
-          }
-        ]
-      }
-    }
-  ],
-  "3": [
-    {
-      "kind": "ItemAttributesGeneratorInterface@v1",
-      "data": {
-        "dna": "81a3d2e6ad3ecf07fa1033ecb11b3d17aef9320c",
-        "attributes": {
-          "Background": "Orange",
+          "Background": "Navy Blue",
           "Body": "Grey",
           "Clothing": "Santa",
           "Face": "Robot Face",
@@ -146,7 +18,7 @@
       "data": {
         "assets": [
           {
-            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Background__z10/Orange__w10.png",
+            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Background__z10/Navy Blue__w10.png",
             "xOffset": 0,
             "yOffset": 0,
             "zOffset": 10
@@ -186,6 +58,134 @@
             "xOffset": 0,
             "yOffset": 0,
             "zOffset": 70
+          }
+        ]
+      }
+    }
+  ],
+  "2": [
+    {
+      "kind": "ItemAttributesGeneratorInterface@v1",
+      "data": {
+        "dna": "c2490a1ce6efd1ec5fdc87dcffc1b0987b7a2653",
+        "attributes": {
+          "Background": "Orange",
+          "Body": "Green",
+          "Clothing": "Santa",
+          "Face": "Zap Face",
+          "Prop": "Backpack"
+        }
+      }
+    },
+    {
+      "kind": "ImageLayersGeneratorInterface@v1",
+      "data": {
+        "assets": [
+          {
+            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Background__z10/Orange__w10.png",
+            "xOffset": 0,
+            "yOffset": 0,
+            "zOffset": 10
+          },
+          {
+            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Body__z20/Green__w10.png",
+            "xOffset": 0,
+            "yOffset": 0,
+            "zOffset": 20
+          },
+          {
+            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Clothing__z30/Santa__w10.png",
+            "xOffset": 0,
+            "yOffset": 0,
+            "zOffset": 30
+          },
+          {
+            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Face__z40/Zap Face__w10.png",
+            "xOffset": 0,
+            "yOffset": 0,
+            "zOffset": 40
+          },
+          {
+            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Face__z40/Zap Face__z-15.png",
+            "xOffset": 0,
+            "yOffset": 0,
+            "zOffset": 25
+          },
+          {
+            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Prop__z50/edge-cases/Backpack__z-35__tClothing__vSanta.png",
+            "xOffset": 0,
+            "yOffset": 0,
+            "zOffset": 15
+          },
+          {
+            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Prop__z50/edge-cases/Backpack__z20__tClothing__vSanta.png",
+            "xOffset": 0,
+            "yOffset": 0,
+            "zOffset": 70
+          }
+        ]
+      }
+    }
+  ],
+  "3": [
+    {
+      "kind": "ItemAttributesGeneratorInterface@v1",
+      "data": {
+        "dna": "2aeee997d8aa886ae2ea9212f216e2df58d613ea",
+        "attributes": {
+          "Background": "Blue",
+          "Body": "Green",
+          "Clothing": "Camo",
+          "Face": "Robot Face",
+          "Prop": "Backpack"
+        }
+      }
+    },
+    {
+      "kind": "ImageLayersGeneratorInterface@v1",
+      "data": {
+        "assets": [
+          {
+            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Background__z10/Blue__w5.png",
+            "xOffset": 0,
+            "yOffset": 0,
+            "zOffset": 10
+          },
+          {
+            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Body__z20/Green__w10.png",
+            "xOffset": 0,
+            "yOffset": 0,
+            "zOffset": 20
+          },
+          {
+            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Clothing__z30/Camo__w10.png",
+            "xOffset": 0,
+            "yOffset": 0,
+            "zOffset": 30
+          },
+          {
+            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Face__z40/Robot Face__w20.png",
+            "xOffset": 0,
+            "yOffset": 0,
+            "zOffset": 40
+          },
+          {
+            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Face__z40/Robot Face__z-15.png",
+            "xOffset": 0,
+            "yOffset": 0,
+            "zOffset": 25
+          },
+          {
+            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Prop__z50/Backpack.png",
+            "xOffset": 0,
+            "yOffset": 0,
+            "zOffset": 50
+          },
+          {
+            "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers/Prop__z50/Backpack__z-35__w10.png",
+            "xOffset": 0,
+            "yOffset": 0,
+            "zOffset": 15
           }
         ]
       }

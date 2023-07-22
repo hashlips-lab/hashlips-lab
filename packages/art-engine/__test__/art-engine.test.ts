@@ -1,17 +1,17 @@
+// Art Engine
 import ArtEngine from "../art-engine";
-
+// Inputs
 import { ImageLayersInput } from "../src/plugins/inputs/image-layers/image-layers.input";
-
+// Generators
 import { ImageLayersAttributesGenerator } from "../src/plugins/generators/image-layers-attributes/image-layers-attributes.generator";
-
+// Renderers
 import { ImageLayersRenderer } from "../src/plugins/renderers/image-layers/image-layers.renderer";
 import { ItemAttributesRenderer } from "../src/plugins/renderers/item-attributes/item-attributes.renderer";
-
+// Exporters
 import { ImagesExporter } from "../src/plugins/exporters/images/images.exporter";
-
 import { Erc721MetadataExporter } from "../src/plugins/exporters/erc721-metadata/erc721-metadata.exporter";
 import { SolMetadataExporter } from "../src/plugins/exporters/sol-metadata/sol-metadata.exporter";
-
+// Processors
 import { SharpImageProcessor } from "../src/utils/processors/sharp/sharp-image.processor";
 
 const BASE_PATH = __dirname;

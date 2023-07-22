@@ -8,7 +8,7 @@ import * as path from "path";
 import crypto from "crypto";
 import ImageLayersGeneratorInterface, {
   IMAGE_LAYERS_GENERATOR_INTERFACE_V1,
-} from "../../../common/generators/image-layers-generator-interface";
+} from "../../../common/generators/image-layers-generator.interface";
 import AttributesGeneratorInterface, {
   ITEM_ATTRIBUTES_GENERATOR_INTERFACE_V1,
 } from "../../../common/generators/item-attributes-generator.interface";

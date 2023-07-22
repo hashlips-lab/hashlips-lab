@@ -8,7 +8,7 @@ import StaticLayeredImagesRendererInterface, {
 import ItemsDataManager from "../../../utils/managers/items-data/items-data.manager";
 import ImageLayersGeneratorInterface, {
   IMAGE_LAYERS_GENERATOR_INTERFACE_V1,
-} from "../../../common/generators/image-layers-generator-interface";
+} from "../../../common/generators/image-layers-generator.interface";
 import * as path from "path";
 import * as fs from "fs";
 import ImageProcessorInterface from "../../../common/processors/image-processor.interface";

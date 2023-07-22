@@ -4,22 +4,22 @@
       "kind": "ItemAttributesRendererInterface@v1",
       "data": {
         "dna": [
-          "0da83988e8306b97336a101cac0f04bd643fc2d9"
+          "36f9dffe5bb9476c61a54afc4a935e804e0e871a"
         ],
         "name": "Ape 1",
-        "description": "This is a token with Orange as a Background",
+        "description": "This is a token with Navy Blue as a Background",
         "attributes": {
           "Background": [
-            "Orange"
+            "Navy Blue"
           ],
           "Body": [
             "Grey"
           ],
           "Clothing": [
-            "Camo"
+            "Santa"
           ],
           "Face": [
-            "Old Face"
+            "Robot Face"
           ],
           "Prop": [
             "Backpack"
@@ -39,22 +39,22 @@
       "kind": "ItemAttributesRendererInterface@v1",
       "data": {
         "dna": [
-          "27c63a2bfac837a57bcb18d9108b09535c7d210d"
+          "c2490a1ce6efd1ec5fdc87dcffc1b0987b7a2653"
         ],
         "name": "Ape 2",
-        "description": "This is a token with Blue as a Background",
+        "description": "This is a token with Orange as a Background",
         "attributes": {
           "Background": [
-            "Blue"
+            "Orange"
           ],
           "Body": [
-            "Robot"
+            "Green"
           ],
           "Clothing": [
             "Santa"
           ],
           "Face": [
-            "Old Face"
+            "Zap Face"
           ],
           "Prop": [
             "Backpack"
@@ -74,19 +74,19 @@
       "kind": "ItemAttributesRendererInterface@v1",
       "data": {
         "dna": [
-          "81a3d2e6ad3ecf07fa1033ecb11b3d17aef9320c"
+          "2aeee997d8aa886ae2ea9212f216e2df58d613ea"
         ],
         "name": "Ape 3",
-        "description": "This is a token with Orange as a Background",
+        "description": "This is a token with Blue as a Background",
         "attributes": {
           "Background": [
-            "Orange"
+            "Blue"
           ],
           "Body": [
-            "Grey"
+            "Green"
           ],
           "Clothing": [
-            "Santa"
+            "Camo"
           ],
           "Face": [
             "Robot Face"

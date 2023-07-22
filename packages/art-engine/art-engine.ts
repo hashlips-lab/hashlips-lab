@@ -54,6 +54,8 @@ export default class ArtEngine {
     this.cacheManager.saveDataToCacheFile(CONFIG_CACHE_FILE, this.config);
 
     this.currConfig = this.cacheManager.getDataFromCache(CONFIG_CACHE_FILE);
+
+    console.log(this.cacheManager.hashes);
   }
 
   private async load() {

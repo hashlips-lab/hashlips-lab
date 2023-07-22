@@ -4,7 +4,6 @@ import * as crypto from "crypto";
 
 import {
   GENERATORS_CACHE_FILE,
-  CONFIG_CACHE_FILE,
   INPUTS_CACHE_FILE,
   PREV_HASHES_CACHE_FILE,
   RENDERERS_CACHE_FILE,

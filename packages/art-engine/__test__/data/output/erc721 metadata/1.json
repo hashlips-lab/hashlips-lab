@@ -1,14 +1,14 @@
 {
-  "description": "This is a token with Orange as a Background",
-  "image": "ipfs://Update/0da83988e8306b97336a101cac0f04bd643fc2d9.png",
+  "description": "This is a token with Navy Blue as a Background",
+  "image": "ipfs://Update/36f9dffe5bb9476c61a54afc4a935e804e0e871a.png",
   "name": "Ape 1",
-  "dna": "0da83988e8306b97336a101cac0f04bd643fc2d9",
+  "dna": "36f9dffe5bb9476c61a54afc4a935e804e0e871a",
   "uid": "1",
   "generator": "HashLips Lab AE 2.0",
   "attributes": [
     {
       "trait_type": "Background",
-      "value": "Orange"
+      "value": "Navy Blue"
     },
     {
       "trait_type": "Body",
@@ -16,11 +16,11 @@
     },
     {
       "trait_type": "Clothing",
-      "value": "Camo"
+      "value": "Santa"
     },
     {
       "trait_type": "Face",
-      "value": "Old Face"
+      "value": "Robot Face"
     },
     {
       "trait_type": "Prop",
