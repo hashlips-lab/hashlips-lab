@@ -12,16 +12,13 @@ export class ImagesExporter implements ExporterInterface {
   private outputPath!: string;
   private imagesFolder: string;
   private imagesPath!: string;
-  private shouldSkip: boolean;
 
   constructor(
     constructorProps: {
       imagesFolder?: string;
-      skip?: boolean;
     } = {}
   ) {
     this.imagesFolder = constructorProps.imagesFolder ?? "images";
-    this.shouldSkip = constructorProps.skip ?? false;
   }
 
   public async init(props: ExporterInitPropsInterface) {
@@ -61,9 +58,5 @@ export class ImagesExporter implements ExporterInterface {
         path.join(this.imagesPath, `${attributes?.data.dna[0]}.png`)
       );
     }
-  }
-
-  public skip() {
-    return this.shouldSkip;
   }
 }

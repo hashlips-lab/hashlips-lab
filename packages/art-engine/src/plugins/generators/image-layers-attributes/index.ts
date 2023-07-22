@@ -12,7 +12,7 @@ import ImageLayersGeneratorInterface, {
 import AttributesGeneratorInterface, {
   ITEM_ATTRIBUTES_GENERATOR_INTERFACE_V1,
 } from "../../../common/generators/item-attributes-generator.interface";
-import { EDGE_CASE_UID_SEPARATOR } from "../../inputs/image-layers/image-layers.input";
+import { EDGE_CASE_UID_SEPARATOR } from "../../inputs/image-layers";
 import RandomSeed from "random-seed";
 
 type Options = ImageLayersInputInterface["layers"][string]["options"];

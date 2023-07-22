@@ -13,7 +13,7 @@ import * as path from "path";
 import * as fs from "fs";
 import ImageProcessorInterface from "../../../common/processors/image-processor.interface";
 import PerformanceTracker from "../../../utils/loggers/performance/performance.logger";
-import { SharpImageProcessor } from "../../../utils/processors/sharp/sharp-image.processor";
+import { SharpImageProcessor } from "../../../utils/processors/sharp";
 import { RENDERERS_TEMP_CACHE_DIR } from "../../../utils/managers/cache/cache.constants";
 
 export class ImageLayersRenderer

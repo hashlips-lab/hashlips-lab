@@ -205,18 +205,14 @@ export default class ArtEngine {
     const timerUid = PerformanceLogger.trackTask("Exporting");
 
     for (const exporter of this.config.exporters) {
-      if (!exporter.skip()) {
-        console.log("Exporting...");
-        await exporter.init({
-          seed: this.cacheManager.seed,
-          outputPath: this.config.outputPath,
-          rendersGetter: () => this.itemsDataManager.getRenders(),
-        });
+      console.log("Exporting...");
+      await exporter.init({
+        seed: this.cacheManager.seed,
+        outputPath: this.config.outputPath,
+        rendersGetter: () => this.itemsDataManager.getRenders(),
+      });
 
-        await exporter.export();
-      } else {
-        console.log("Export skipped");
-      }
+      await exporter.export();
     }
 
     PerformanceLogger.endTask(timerUid);

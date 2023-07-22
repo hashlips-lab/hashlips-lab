@@ -1,18 +1,18 @@
 // Art Engine
 import ArtEngine from "../src/art-engine";
 // Inputs
-import { ImageLayersInput } from "../src/plugins/inputs/image-layers/image-layers.input";
+import { ImageLayersInput } from "../src/plugins/inputs/image-layers";
 // Generators
-import { ImageLayersAttributesGenerator } from "../src/plugins/generators/image-layers-attributes/image-layers-attributes.generator";
+import { ImageLayersAttributesGenerator } from "../src/plugins/generators/image-layers-attributes";
 // Renderers
-import { ImageLayersRenderer } from "../src/plugins/renderers/image-layers/image-layers.renderer";
-import { ItemAttributesRenderer } from "../src/plugins/renderers/item-attributes/item-attributes.renderer";
+import { ImageLayersRenderer } from "../src/plugins/renderers/image-layers";
+import { ItemAttributesRenderer } from "../src/plugins/renderers/item-attributes";
 // Exporters
-import { ImagesExporter } from "../src/plugins/exporters/images/images.exporter";
-import { Erc721MetadataExporter } from "../src/plugins/exporters/erc721-metadata/erc721-metadata.exporter";
-import { SolMetadataExporter } from "../src/plugins/exporters/sol-metadata/sol-metadata.exporter";
+import { ImagesExporter } from "../src/plugins/exporters/images";
+import { Erc721MetadataExporter } from "../src/plugins/exporters/erc721-metadata";
+import { SolMetadataExporter } from "../src/plugins/exporters/sol-metadata";
 // Processors
-import { SharpImageProcessor } from "../src/utils/processors/sharp/sharp-image.processor";
+import { SharpImageProcessor } from "../src/utils/processors/sharp";
 
 const BASE_PATH = __dirname;
 
