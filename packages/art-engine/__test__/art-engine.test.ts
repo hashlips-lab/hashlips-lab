@@ -1,5 +1,5 @@
 // Art Engine
-import ArtEngine from "../art-engine";
+import ArtEngine from "../src/art-engine";
 // Inputs
 import { ImageLayersInput } from "../src/plugins/inputs/image-layers/image-layers.input";
 // Generators

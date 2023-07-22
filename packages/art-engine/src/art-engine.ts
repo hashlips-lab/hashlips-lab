@@ -1,13 +1,12 @@
-import InputInterface from "./src/common/inputs/input.interface";
-import GeneratorInterface from "./src/common/generators/generator.interface";
-import RendererInterface from "./src/common/renderers/renderer.interface";
-import ExporterInterface from "./src/common/exporters/exporter.interface";
-import InputsManager from "./src/utils/managers/inputs/inputs.manager";
-import ItemsDataManager from "./src/utils/managers/items-data/items-data.manager";
-import PerformanceLogger from "./src/utils/loggers/performance/performance.logger";
-import HeroLogger from "./src/utils/loggers/hero/hero.logger";
-import PackageJson from "./package.json";
-import CacheManager from "./src/utils/managers/cache/cache.manager";
+import InputInterface from "./common/inputs/input.interface";
+import GeneratorInterface from "./common/generators/generator.interface";
+import RendererInterface from "./common/renderers/renderer.interface";
+import ExporterInterface from "./common/exporters/exporter.interface";
+import InputsManager from "./utils/managers/inputs/inputs.manager";
+import ItemsDataManager from "./utils/managers/items-data/items-data.manager";
+import PerformanceLogger from "./utils/loggers/performance/performance.logger";
+import HeroLogger from "./utils/loggers/hero/hero.logger";
+import CacheManager from "./utils/managers/cache/cache.manager";
 
 import {
   CONFIG_CACHE_FILE,
@@ -16,7 +15,7 @@ import {
   PREV_HASHES_CACHE_FILE,
   RENDERERS_CACHE_FILE,
   RENDERERS_TEMP_CACHE_DIR,
-} from "./src/utils/managers/cache/cache.constants";
+} from "./utils/managers/cache/cache.constants";
 
 PerformanceLogger.enable();
 HeroLogger.enable();
@@ -45,7 +44,7 @@ export default class ArtEngine {
     this.itemsDataManager = new ItemsDataManager();
     this.cacheManager = new CacheManager(this.config.cachePath);
 
-    HeroLogger.printHero(PackageJson.version);
+    HeroLogger.printHero();
 
     this.cacheManager.init();
 
