@@ -1,0 +1,30 @@
+{
+  "description": "This is a token with Orange as a Background",
+  "image": "ipfs://Update/81a3d2e6ad3ecf07fa1033ecb11b3d17aef9320c.png",
+  "name": "Ape 3",
+  "dna": "81a3d2e6ad3ecf07fa1033ecb11b3d17aef9320c",
+  "uid": "3",
+  "generator": "HashLips Lab AE 2.0",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Orange"
+    },
+    {
+      "trait_type": "Body",
+      "value": "Grey"
+    },
+    {
+      "trait_type": "Clothing",
+      "value": "Santa"
+    },
+    {
+      "trait_type": "Face",
+      "value": "Robot Face"
+    },
+    {
+      "trait_type": "Prop",
+      "value": "Backpack"
+    }
+  ]
+}

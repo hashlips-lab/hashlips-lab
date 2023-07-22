@@ -3,12 +3,12 @@ import * as path from "path";
 import * as crypto from "crypto";
 
 import {
-  ATTRIBUTES_CACHE_FILE,
+  GENERATORS_CACHE_FILE,
   CONFIG_CACHE_FILE,
   INPUTS_CACHE_FILE,
   PREV_HASHES_CACHE_FILE,
-  RENDERS_CACHE_FILE,
-  RENDERS_TEMP_CACHE_DIR,
+  RENDERERS_CACHE_FILE,
+  RENDERERS_TEMP_CACHE_DIR,
   SEED_CACHE_FILE,
 } from "./cache.constants";
 
@@ -23,24 +23,20 @@ export default class CacheManager {
 
   constructor(private cachePath: string) {
     this.hashes = {
-      config: {
-        curr: this.generateCacheFileOrFolderHash(CONFIG_CACHE_FILE),
-        prev: "",
-      },
       inputs: {
         curr: this.generateCacheFileOrFolderHash(INPUTS_CACHE_FILE),
         prev: "",
       },
       generators: {
-        curr: this.generateCacheFileOrFolderHash(ATTRIBUTES_CACHE_FILE),
+        curr: this.generateCacheFileOrFolderHash(GENERATORS_CACHE_FILE),
         prev: "",
       },
       renderers: {
-        curr: this.generateCacheFileOrFolderHash(RENDERS_CACHE_FILE),
+        curr: this.generateCacheFileOrFolderHash(RENDERERS_CACHE_FILE),
         prev: "",
       },
       renderers_temp: {
-        curr: this.generateCacheFileOrFolderHash(RENDERS_TEMP_CACHE_DIR),
+        curr: this.generateCacheFileOrFolderHash(RENDERERS_TEMP_CACHE_DIR),
         prev: "",
       },
     };
@@ -76,7 +72,6 @@ export default class CacheManager {
     let prevCachePath = this.getCachePath(PREV_HASHES_CACHE_FILE);
     if (fs.existsSync(prevCachePath)) {
       const prevHashes = JSON.parse(fs.readFileSync(prevCachePath).toString());
-      this.hashes.config.prev = prevHashes.config?.curr;
       this.hashes.inputs.prev = prevHashes.inputs?.curr;
       this.hashes.generators.prev = prevHashes.generators?.curr;
       this.hashes.renderers.prev = prevHashes.renderers?.curr;
@@ -108,6 +103,12 @@ export default class CacheManager {
       this.getCachePath(relativePath),
       JSON.stringify(data, null, 2)
     );
+  }
+
+  public computeDataHash(data: any): string {
+    const hash = crypto.createHash("sha256");
+    hash.update(JSON.stringify(data));
+    return hash.digest("hex");
   }
 
   private computeFileHash(filePath: string): string {

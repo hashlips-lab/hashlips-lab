@@ -1,0 +1,51 @@
+{
+  "cachePath": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/cache",
+  "outputPath": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/output",
+  "useCache": true,
+  "inputs": {
+    "apes": {
+      "assetsBasePath": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers"
+    }
+  },
+  "generators": [
+    {
+      "dataSet": "apes",
+      "startIndex": 1,
+      "endIndex": 3
+    }
+  ],
+  "renderers": [
+    {},
+    {
+      "imageProcessor": {},
+      "width": 2048,
+      "height": 2048
+    }
+  ],
+  "exporters": [
+    {
+      "imagesFolder": "images",
+      "shouldSkip": false
+    },
+    {
+      "metadataFolder": "erc721 metadata",
+      "imageUriPrefix": "ipfs://Update/",
+      "shouldSkip": false
+    },
+    {
+      "metadataFolder": "sol metadata",
+      "symbol": "APES",
+      "sellerFeeBasisPoints": 200,
+      "collectionName": "The Apes",
+      "collectionFamily": "",
+      "imageUriPrefix": "ipfs://CID/",
+      "creators": [
+        {
+          "address": "xEtQ9Fpv62qdc1GYfpNReMasVTe9YW5bHJwfVKqo72u",
+          "share": 100
+        }
+      ],
+      "shouldSkip": false
+    }
+  ]
+}

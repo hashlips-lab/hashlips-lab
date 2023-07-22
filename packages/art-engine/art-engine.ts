@@ -10,12 +10,12 @@ import PackageJson from "./package.json";
 import CacheManager from "./src/utils/managers/cache/cache.manager";
 
 import {
-  ATTRIBUTES_CACHE_FILE,
   CONFIG_CACHE_FILE,
+  GENERATORS_CACHE_FILE,
   INPUTS_CACHE_FILE,
   PREV_HASHES_CACHE_FILE,
-  RENDERS_CACHE_FILE,
-  RENDERS_TEMP_CACHE_DIR,
+  RENDERERS_CACHE_FILE,
+  RENDERERS_TEMP_CACHE_DIR,
 } from "./src/utils/managers/cache/cache.constants";
 
 PerformanceLogger.enable();
@@ -36,18 +36,24 @@ export default class ArtEngine {
   private cacheManager: CacheManager;
   private inputsManager: InputsManager;
   private itemsDataManager: ItemsDataManager;
+  private prevConfig: Config;
+  private currConfig: Config;
 
   constructor(config: Config) {
-    this.config = config;
+    this.config = { ...config };
     this.inputsManager = new InputsManager();
     this.itemsDataManager = new ItemsDataManager();
     this.cacheManager = new CacheManager(this.config.cachePath);
 
-    this.cacheManager.init();
     HeroLogger.printHero(PackageJson.version);
 
+    this.cacheManager.init();
+
+    this.prevConfig = this.cacheManager.getDataFromCache(CONFIG_CACHE_FILE);
+
     this.cacheManager.saveDataToCacheFile(CONFIG_CACHE_FILE, this.config);
-    console.log("Cache hashes before run", this.cacheManager.hashes);
+
+    this.currConfig = this.cacheManager.getDataFromCache(CONFIG_CACHE_FILE);
   }
 
   private async load() {
@@ -62,7 +68,8 @@ export default class ArtEngine {
       if (
         this.config.useCache &&
         cachedData &&
-        cacheHashes.config.curr === cacheHashes.config.prev &&
+        this.cacheManager.computeDataHash(this.currConfig?.inputs) ===
+          this.cacheManager.computeDataHash(this.prevConfig?.inputs) &&
         cacheHashes.inputs.curr === cacheHashes.inputs.prev
       ) {
         console.log("Loading from cache...");
@@ -89,7 +96,7 @@ export default class ArtEngine {
   private async generate() {
     const timerUid = PerformanceLogger.trackTask("Generating");
     const cachedData = this.cacheManager.getDataFromCache(
-      ATTRIBUTES_CACHE_FILE
+      GENERATORS_CACHE_FILE
     );
 
     const cacheHashes = this.cacheManager.hashes;
@@ -98,6 +105,8 @@ export default class ArtEngine {
       if (
         this.config.useCache &&
         cachedData &&
+        this.cacheManager.computeDataHash(this.currConfig?.generators) ===
+          this.cacheManager.computeDataHash(this.prevConfig?.generators) &&
         cacheHashes.inputs.curr === cacheHashes.inputs.prev &&
         cacheHashes.generators.curr === cacheHashes.generators.prev
       ) {
@@ -124,12 +133,12 @@ export default class ArtEngine {
     const frozenAttributesData = this.itemsDataManager.freezeAttributes();
 
     this.cacheManager.saveDataToCacheFile(
-      ATTRIBUTES_CACHE_FILE,
+      GENERATORS_CACHE_FILE,
       frozenAttributesData
     );
 
     const currHash = this.cacheManager.generateCacheFileOrFolderHash(
-      ATTRIBUTES_CACHE_FILE
+      GENERATORS_CACHE_FILE
     );
 
     this.cacheManager.updateCurrCacheHashAtKey("generators", currHash);
@@ -139,7 +148,7 @@ export default class ArtEngine {
 
   private async render() {
     const timerUid = PerformanceLogger.trackTask("Rendering");
-    const cachedData = this.cacheManager.getDataFromCache(RENDERS_CACHE_FILE);
+    const cachedData = this.cacheManager.getDataFromCache(RENDERERS_CACHE_FILE);
 
     const cacheHashes = this.cacheManager.hashes;
 
@@ -147,6 +156,8 @@ export default class ArtEngine {
       if (
         this.config.useCache &&
         cachedData &&
+        this.cacheManager.computeDataHash(this.currConfig?.renderers) ===
+          this.cacheManager.computeDataHash(this.prevConfig?.renderers) &&
         cacheHashes.generators.curr === cacheHashes.generators.prev &&
         cacheHashes.renderers.curr === cacheHashes.renderers.prev &&
         cacheHashes.renderers_temp.curr === cacheHashes.renderers_temp.prev
@@ -172,15 +183,15 @@ export default class ArtEngine {
     const frozenRendersData = this.itemsDataManager.freezeRenders();
 
     this.cacheManager.saveDataToCacheFile(
-      RENDERS_CACHE_FILE,
+      RENDERERS_CACHE_FILE,
       frozenRendersData
     );
 
     const currHash =
-      this.cacheManager.generateCacheFileOrFolderHash(RENDERS_CACHE_FILE);
+      this.cacheManager.generateCacheFileOrFolderHash(RENDERERS_CACHE_FILE);
 
     const currTempHash = this.cacheManager.generateCacheFileOrFolderHash(
-      RENDERS_TEMP_CACHE_DIR
+      RENDERERS_TEMP_CACHE_DIR
     );
 
     this.cacheManager.updateCurrCacheHashAtKey("renderers", currHash);
@@ -221,7 +232,6 @@ export default class ArtEngine {
       PREV_HASHES_CACHE_FILE,
       this.cacheManager.hashes
     );
-    console.log("Cache hashes after run", this.cacheManager.hashes);
     console.log("Done");
   }
 

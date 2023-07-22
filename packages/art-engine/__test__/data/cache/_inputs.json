@@ -1,0 +1,297 @@
+{
+  "apes": {
+    "basePath": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/layers",
+    "layers": {
+      "Background": {
+        "name": "Background",
+        "baseXOffset": 0,
+        "baseYOffset": 0,
+        "baseZOffset": 10,
+        "options": {
+          "Blue": {
+            "name": "Blue",
+            "weight": 5,
+            "assets": [
+              {
+                "path": "Background__z10/Blue__w5.png",
+                "relativeXOffset": 0,
+                "relativeYOffset": 0,
+                "relativeZOffset": 0,
+                "lastModifiedTime": 1688869359527,
+                "size": 17808
+              }
+            ],
+            "edgeCases": {}
+          },
+          "Navy Blue": {
+            "name": "Navy Blue",
+            "weight": 10,
+            "assets": [
+              {
+                "path": "Background__z10/Navy Blue__w10.png",
+                "relativeXOffset": 0,
+                "relativeYOffset": 0,
+                "relativeZOffset": 0,
+                "lastModifiedTime": 1688869359527,
+                "size": 17808
+              }
+            ],
+            "edgeCases": {}
+          },
+          "Orange": {
+            "name": "Orange",
+            "weight": 10,
+            "assets": [
+              {
+                "path": "Background__z10/Orange__w10.png",
+                "relativeXOffset": 0,
+                "relativeYOffset": 0,
+                "relativeZOffset": 0,
+                "lastModifiedTime": 1688869359528,
+                "size": 17808
+              }
+            ],
+            "edgeCases": {}
+          }
+        }
+      },
+      "Body": {
+        "name": "Body",
+        "baseXOffset": 0,
+        "baseYOffset": 0,
+        "baseZOffset": 20,
+        "options": {
+          "Green": {
+            "name": "Green",
+            "weight": 10,
+            "assets": [
+              {
+                "path": "Body__z20/Green__w10.png",
+                "relativeXOffset": 0,
+                "relativeYOffset": 0,
+                "relativeZOffset": 0,
+                "lastModifiedTime": 1688869359541,
+                "size": 2397954
+              }
+            ],
+            "edgeCases": {}
+          },
+          "Grey": {
+            "name": "Grey",
+            "weight": 10,
+            "assets": [
+              {
+                "path": "Body__z20/Grey__w10.png",
+                "relativeXOffset": 0,
+                "relativeYOffset": 0,
+                "relativeZOffset": 0,
+                "lastModifiedTime": 1688869359552,
+                "size": 2125451
+              }
+            ],
+            "edgeCases": {}
+          },
+          "Robot": {
+            "name": "Robot",
+            "weight": 5,
+            "assets": [
+              {
+                "path": "Body__z20/Robot__w5.png",
+                "relativeXOffset": 0,
+                "relativeYOffset": 0,
+                "relativeZOffset": 0,
+                "lastModifiedTime": 1688869359562,
+                "size": 2267364
+              }
+            ],
+            "edgeCases": {}
+          }
+        }
+      },
+      "Clothing": {
+        "name": "Clothing",
+        "baseXOffset": 0,
+        "baseYOffset": 0,
+        "baseZOffset": 30,
+        "options": {
+          "Camo": {
+            "name": "Camo",
+            "weight": 10,
+            "assets": [
+              {
+                "path": "Clothing__z30/Camo__w10.png",
+                "relativeXOffset": 0,
+                "relativeYOffset": 0,
+                "relativeZOffset": 0,
+                "lastModifiedTime": 1688869359564,
+                "size": 394114
+              }
+            ],
+            "edgeCases": {}
+          },
+          "Eye suite": {
+            "name": "Eye suite",
+            "weight": 10,
+            "assets": [
+              {
+                "path": "Clothing__z30/Eye suite__w10.png",
+                "relativeXOffset": 0,
+                "relativeYOffset": 0,
+                "relativeZOffset": 0,
+                "lastModifiedTime": 1688869359565,
+                "size": 180907
+              }
+            ],
+            "edgeCases": {}
+          },
+          "Santa": {
+            "name": "Santa",
+            "weight": 10,
+            "assets": [
+              {
+                "path": "Clothing__z30/Santa__w10.png",
+                "relativeXOffset": 0,
+                "relativeYOffset": 0,
+                "relativeZOffset": 0,
+                "lastModifiedTime": 1688869359566,
+                "size": 157113
+              }
+            ],
+            "edgeCases": {}
+          }
+        }
+      },
+      "Face": {
+        "name": "Face",
+        "baseXOffset": 0,
+        "baseYOffset": 0,
+        "baseZOffset": 40,
+        "options": {
+          "Old Face": {
+            "name": "Old Face",
+            "weight": 10,
+            "assets": [
+              {
+                "path": "Face__z40/Old Face__w10.png",
+                "relativeXOffset": 0,
+                "relativeYOffset": 0,
+                "relativeZOffset": 0,
+                "lastModifiedTime": 1688869359567,
+                "size": 284495
+              },
+              {
+                "path": "Face__z40/Old Face__z-15.png",
+                "relativeXOffset": 0,
+                "relativeYOffset": 0,
+                "relativeZOffset": -15,
+                "lastModifiedTime": 1688869359567,
+                "size": 60502
+              }
+            ],
+            "edgeCases": {}
+          },
+          "Robot Face": {
+            "name": "Robot Face",
+            "weight": 20,
+            "assets": [
+              {
+                "path": "Face__z40/Robot Face__w20.png",
+                "relativeXOffset": 0,
+                "relativeYOffset": 0,
+                "relativeZOffset": 0,
+                "lastModifiedTime": 1688869359569,
+                "size": 398000
+              },
+              {
+                "path": "Face__z40/Robot Face__z-15.png",
+                "relativeXOffset": 0,
+                "relativeYOffset": 0,
+                "relativeZOffset": -15,
+                "lastModifiedTime": 1688869359569,
+                "size": 106111
+              }
+            ],
+            "edgeCases": {}
+          },
+          "Zap Face": {
+            "name": "Zap Face",
+            "weight": 10,
+            "assets": [
+              {
+                "path": "Face__z40/Zap Face__w10.png",
+                "relativeXOffset": 0,
+                "relativeYOffset": 0,
+                "relativeZOffset": 0,
+                "lastModifiedTime": 1688869359571,
+                "size": 248144
+              },
+              {
+                "path": "Face__z40/Zap Face__z-15.png",
+                "relativeXOffset": 0,
+                "relativeYOffset": 0,
+                "relativeZOffset": -15,
+                "lastModifiedTime": 1688869359571,
+                "size": 61073
+              }
+            ],
+            "edgeCases": {}
+          }
+        }
+      },
+      "Prop": {
+        "name": "Prop",
+        "baseXOffset": 0,
+        "baseYOffset": 0,
+        "baseZOffset": 50,
+        "options": {
+          "Backpack": {
+            "name": "Backpack",
+            "weight": 10,
+            "assets": [
+              {
+                "path": "Prop__z50/Backpack.png",
+                "relativeXOffset": 0,
+                "relativeYOffset": 0,
+                "relativeZOffset": 0,
+                "lastModifiedTime": 1688869359571,
+                "size": 42910
+              },
+              {
+                "path": "Prop__z50/Backpack__z-35__w10.png",
+                "relativeXOffset": 0,
+                "relativeYOffset": 0,
+                "relativeZOffset": -35,
+                "lastModifiedTime": 1688869359572,
+                "size": 83325
+              }
+            ],
+            "edgeCases": {
+              "Clothing#Santa": {
+                "matchingTrait": "Clothing",
+                "matchingValue": "Santa",
+                "assets": [
+                  {
+                    "path": "Prop__z50/edge-cases/Backpack__z-35__tClothing__vSanta.png",
+                    "relativeXOffset": 0,
+                    "relativeYOffset": 0,
+                    "relativeZOffset": -35,
+                    "lastModifiedTime": 1688869359572,
+                    "size": 83325
+                  },
+                  {
+                    "path": "Prop__z50/edge-cases/Backpack__z20__tClothing__vSanta.png",
+                    "relativeXOffset": 0,
+                    "relativeYOffset": 0,
+                    "relativeZOffset": 20,
+                    "lastModifiedTime": 1688869359572,
+                    "size": 47382
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "1": [
+    {
+      "kind": "ItemAttributesRendererInterface@v1",
+      "data": {
+        "dna": [
+          "0da83988e8306b97336a101cac0f04bd643fc2d9"
+        ],
+        "name": "Ape 1",
+        "description": "This is a token with Orange as a Background",
+        "attributes": {
+          "Background": [
+            "Orange"
+          ],
+          "Body": [
+            "Grey"
+          ],
+          "Clothing": [
+            "Camo"
+          ],
+          "Face": [
+            "Old Face"
+          ],
+          "Prop": [
+            "Backpack"
+          ]
+        }
+      }
+    },
+    {
+      "kind": "StaticLayeredImagesRendererInterface@v1",
+      "data": {
+        "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/cache/_temp/1.png"
+      }
+    }
+  ],
+  "2": [
+    {
+      "kind": "ItemAttributesRendererInterface@v1",
+      "data": {
+        "dna": [
+          "27c63a2bfac837a57bcb18d9108b09535c7d210d"
+        ],
+        "name": "Ape 2",
+        "description": "This is a token with Blue as a Background",
+        "attributes": {
+          "Background": [
+            "Blue"
+          ],
+          "Body": [
+            "Robot"
+          ],
+          "Clothing": [
+            "Santa"
+          ],
+          "Face": [
+            "Old Face"
+          ],
+          "Prop": [
+            "Backpack"
+          ]
+        }
+      }
+    },
+    {
+      "kind": "StaticLayeredImagesRendererInterface@v1",
+      "data": {
+        "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/cache/_temp/2.png"
+      }
+    }
+  ],
+  "3": [
+    {
+      "kind": "ItemAttributesRendererInterface@v1",
+      "data": {
+        "dna": [
+          "81a3d2e6ad3ecf07fa1033ecb11b3d17aef9320c"
+        ],
+        "name": "Ape 3",
+        "description": "This is a token with Orange as a Background",
+        "attributes": {
+          "Background": [
+            "Orange"
+          ],
+          "Body": [
+            "Grey"
+          ],
+          "Clothing": [
+            "Santa"
+          ],
+          "Face": [
+            "Robot Face"
+          ],
+          "Prop": [
+            "Backpack"
+          ]
+        }
+      }
+    },
+    {
+      "kind": "StaticLayeredImagesRendererInterface@v1",
+      "data": {
+        "path": "/Users/hashlips/Desktop/files/Personal/wip/hashlips-lab/packages/art-engine/__test__/data/cache/_temp/3.png"
+      }
+    }
+  ]
+}
