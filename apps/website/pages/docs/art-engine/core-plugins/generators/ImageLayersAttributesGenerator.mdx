@@ -9,19 +9,16 @@ The Image Layers Attributes Generator is a core generator plugin designed to gen
 
 To use the Image Layers Attributes Generator plugin in the Art Engine, follow these steps:
 
-1.  First, make sure you have the necessary dependencies and imports in your project to support the generator.
-
-2.  Import the `ImageLayersAttributesGenerator` class from the plugin file:
+1.  Import the `ImageLayersAttributesGenerator` class from the plugin file:
 
 ```ts copy
 const {
   ArtEngine,
-  inputs,
   ImageLayersAttributesGenerator,
 } = require("@hashlips-lab/art-engine");
 ```
 
-3. Create an instance of the generator, providing the required parameters:
+2. Create an instance of the generator, providing the required parameters:
 
 ```ts copy
 const ae = new ArtEngine({
@@ -29,22 +26,16 @@ const ae = new ArtEngine({
   outputPath: `${BASE_PATH}/output`,
   useCache: false,
 
-  inputs: {
-    apes: new inputs.ImageLayersInput({
-      assetsBasePath: `${BASE_PATH}/data/layers`,
-    }),
-    // Add more inputs if needed...
-  },
-
   generators: [
     new ImageLayersAttributesGenerator({
       dataSet: "apes", // Replace "apes" with your actual dataset key
       startIndex: 1,   // Start index for generating items
       endIndex: 10,    // End index for generating items
     });
+    // Add more generators if needed...
   ]
 
-  // renderers, and exporters as required...
+  // Add inputs, renderers, and exporters as required...
 });
 ```
 
