@@ -1,0 +1,43 @@
+import { Callout } from "nextra-theme-docs";
+import Image from "next/image";
+
+# Images Exporter
+
+The Images Exporter plugin plays a crucial role in the Art Engine's export process, allowing the easy retrieval and organization of images generated during the rendering process. This plugin takes the data from the renderer, locates the related images saved in the temporary folder, and then copies and renames these files into the specified output directory. The Images Exporter ensures that the rendered images are correctly organized and readily available for further use, such as minting NFTs or showcasing the artwork.
+
+## Adding the plugin
+
+1.  Import the plugin object:
+
+```ts copy
+const { ArtEngine, exporters } = require("@hashlips-lab/art-engine");
+```
+
+2. Setup a base path:
+
+```ts copy
+const BASE_PATH = __dirname;
+```
+
+3. Add the plugin to an instance of the Art Engine:
+
+```ts copy
+const ae = new ArtEngine({
+  cachePath: `${BASE_PATH}/cache`,
+  outputPath: `${BASE_PATH}/output`,
+  useCache: false,
+
+  exporters: [
+    new exporters.ImagesExporter({
+      imagesFolder: "artwork_images",
+    });
+    // Add more generators if needed...
+  ]
+
+  // Add inputs, exporters, renderers as required...
+});
+```
+
+## Parameters
+
+- `imagesFolder` (optional): A string representing the name of the folder where the exported images will be stored. If not provided, a default folder named "images" will be used.

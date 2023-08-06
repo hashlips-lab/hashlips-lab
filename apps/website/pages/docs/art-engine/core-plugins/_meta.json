@@ -1,5 +1,7 @@
 {
   "index": "Overview",
   "inputs": "Inputs",
-  "generators": "Generators"
+  "generators": "Generators",
+  "renderers": "Renderers",
+  "exporters": "Exporters"
 }

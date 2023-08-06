@@ -5,20 +5,21 @@ import Image from "next/image";
 
 The Image Layers Attributes Generator is a core generator plugin designed to generate attributes and assets for image layers in the Art Engine. It takes an input dataset of image layers and their options, calculates unique DNA for each generated item, and randomly selects attributes based on the provided weights. It also handles edge cases for assets that depend on specific attribute combinations.
 
-### How to Add the Plugin to the Art Engine
+## Adding the plugin
 
-To use the Image Layers Attributes Generator plugin in the Art Engine, follow these steps:
-
-1.  Import the `ImageLayersAttributesGenerator` class from the plugin file:
+1.  Import the plugin object:
 
 ```ts copy
-const {
-  ArtEngine,
-  ImageLayersAttributesGenerator,
-} = require("@hashlips-lab/art-engine");
+const { ArtEngine, generators } = require("@hashlips-lab/art-engine");
 ```
 
-2. Create an instance of the generator, providing the required parameters:
+2. Setup a base path:
+
+```ts copy
+const BASE_PATH = __dirname;
+```
+
+3. Add the plugin to an instance of the Art Engine:
 
 ```ts copy
 const ae = new ArtEngine({
@@ -27,7 +28,7 @@ const ae = new ArtEngine({
   useCache: false,
 
   generators: [
-    new ImageLayersAttributesGenerator({
+    new generators.ImageLayersAttributesGenerator({
       dataSet: "apes", // Replace "apes" with your actual dataset key
       startIndex: 1,   // Start index for generating items
       endIndex: 10,    // End index for generating items
@@ -39,14 +40,12 @@ const ae = new ArtEngine({
 });
 ```
 
-### Parameters
-
-The `ImageLayersAttributesGenerator` requires the following parameters during initialization:
+## Parameters
 
 - `dataSet`: A string representing the key of the input dataset containing image layers and their options. The dataset should be set up using the Image Layers Input plugin.
 - `startIndex`: An integer representing the starting index for generating items.
 - `endIndex`: An integer representing the ending index for generating items.
 
-### Dependencies
+## Dependencies
 
 The Image Layers Attributes Generator depends on the Image Layers Input plugin, which provides the input dataset structure with image layers and their options. The `apes` key is used as an example dataset key, but in your project, you should replace it with the actual key used for your image layers input.
