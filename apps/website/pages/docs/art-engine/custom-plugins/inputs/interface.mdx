@@ -1,0 +1,24 @@
+# Inputs Interface
+
+All input plugins in the Art Engine implement the `InputInterface<InputDataType>` interface. This interface defines the basic structure that an input plugin should follow.
+
+```ts copy
+interface InputInterface<InputDataType> {
+  init: (props: InputInitPropsInterface) => Promise<void>;
+  load: () => Promise<InputDataType>;
+}
+```
+
+- `InputInterface<InputDataType>`: This is the main interface for an input plugin. It's parameterized with a generic type, `InputDataType`, which represents the type of data that the input plugin will produce.
+- `init(props: InputInitPropsInterface) => Promise<void>`: This method is used to initialize the input plugin. It takes an object of type `InputInitPropsInterface` as an argument, which contains the seed. The method returns a promise that resolves when the initialization is complete.
+- `load() => Promise<InputDataType>`: This method is responsible for loading and retrieving the input data. It returns a promise that resolves to an object of type `InputDataType`, which is the actual input data produced by the plugin.
+
+```ts copy
+interface InputInitPropsInterface {
+  seed: string;
+}
+```
+
+`InputInitPropsInterface`: This is an interface that defines the properties required to initialize an input plugin. In this case, there's a single property defined:
+
+- `seed`: This is a string value that serves as a seed for deterministic behavior. The seed can be used to ensure that the same input plugin produces the same output when initialized with the same seed.

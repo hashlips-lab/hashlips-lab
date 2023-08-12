@@ -1,0 +1,35 @@
+# Generators Interface
+
+All generator plugins in the Art Engine implement the `GeneratorInterface<GeneratorDataType>` interface. This interface defines the basic structure that an generator plugin should follow.
+
+```ts copy
+interface GeneratorInterface<GeneratorDataType> {
+  init: (props: GeneratorInitPropsInterface) => Promise<void>;
+  generate: () => Promise<ItemsAttributes<GeneratorDataType>>;
+}
+```
+
+- `GeneratorInterface<GeneratorDataType>`: This is a generic interface. `GeneratorDataType` specifies the type of data that the generator will produce, which corresponds to the type of data that the `ItemsAttributes` interface is parameterized with.
+- `init(props: GeneratorInitPropsInterface) => Promise<void>`: This method is used to initialize the generator. It takes an object of type `GeneratorInitPropsInterface` as an argument, containing the seed and inputs manager. It returns a promise that resolves when the initialization is complete.
+- `generate() => Promise<ItemsAttributes<GeneratorDataType>>`: This method is responsible for generating the attributes for items. It returns a promise that resolves to an object conforming to the structure defined by `ItemsAttributes<GeneratorDataType>`. This object maps item UIDs to arrays of attributes.
+
+```ts copy
+interface ItemsAttributes<AttributeDataType> {
+  [itemUid: string]: ItemPropertiesInterface<AttributeDataType>[];
+}
+```
+
+This part of the code defines the structure of the attributes data that the generator will produce. It's essentially a mapping between item unique identifiers (item UIDs) and arrays of attribute data. Here's what's happening:
+
+- `ItemsAttributes<AttributeDataType>`: This is a generic interface. The `AttributeDataType` represents the type of data that the attributes will hold. It could be strings, numbers, or any other relevant data type.
+- `[itemUid: string]: ItemPropertiesInterface<AttributeDataType>[]`: This is an object that maps item UIDs (strings) to arrays of attribute data. Each item UID serves as a key, and its corresponding value is an array of attributes, where each attribute has a specific format defined by the `ItemPropertiesInterface` (which likely holds the attribute name and value).
+
+```ts copy
+interface GeneratorInitPropsInterface {
+  seed: string;
+  inputsManager: InputsManager;
+}
+```
+
+- `seed`: This is a string value that serves as a seed for deterministic generation. Deterministic generation ensures that the same input will always produce the same output, which can be useful for testing and reproducibility.
+- `inputsManager`: This is an instance of the `InputsManager` class. The `InputsManager` is used to manage and access the data produced by input plugins. It allows the generator to retrieve data from various input sources, such as images or text, and use it in the generation process.

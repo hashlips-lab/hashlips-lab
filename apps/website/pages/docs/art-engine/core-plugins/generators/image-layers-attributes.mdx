@@ -1,6 +1,3 @@
-import { Callout } from "nextra-theme-docs";
-import Image from "next/image";
-
 # Image Layers Attributes Generator
 
 The Image Layers Attributes Generator is a core generator plugin designed to generate attributes and assets for image layers in the Art Engine. It takes an input dataset of image layers and their options, calculates unique DNA for each generated item, and randomly selects attributes based on the provided weights. It also handles edge cases for assets that depend on specific attribute combinations.
@@ -49,3 +46,58 @@ const ae = new ArtEngine({
 ## Dependencies
 
 The Image Layers Attributes Generator depends on the Image Layers Input plugin, which provides the input dataset structure with image layers and their options. The `apes` key is used as an example dataset key, but in your project, you should replace it with the actual key used for your image layers input.
+
+## Interfaces
+
+### Base
+
+This plugin adheres to the base generator interface called `GeneratorInterface<GeneratorDataType>`.
+
+- [GeneratorInterface](../../custom-plugins/generators/interface)
+
+### Custom
+
+The Image Layers Attributes Generator plugin is a prime example of a generator in the Art Engine ecosystem. It adheres to the core generator interface and implements specialized output interfaces for the attributes it generates.
+
+Two custom interfaces are essential for the Image Layers Attributes Generator:
+
+- `ImageLayersGeneratorInterface`:
+
+```ts copy
+export default interface ImageLayersGeneratorInterface {
+  assets: {
+    path: string;
+    xOffset: number;
+    yOffset: number;
+    zOffset: number;
+  }[];
+}
+```
+
+- `ItemAttributesGeneratorInterface`:
+
+```ts copy
+export default interface ItemAttributesGeneratorInterface {
+  dna: string;
+  attributes: {
+    [traitName: string]: string;
+  };
+}
+```
+
+In the context of the Image Layers Attributes Generator, these interfaces define the structure of the generated attributes. The generator can produce either image layer information or item attributes.
+
+The `ImageLayersAttributesGenerator` class encapsulates this functionality and implements the `GeneratorInterface` by utilizing the `GeneratorOutput` type:
+
+```ts copy
+type GeneratorOutput =
+  | ImageLayersGeneratorInterface
+  | ItemAttributesGeneratorInterface;
+
+class ImageLayersAttributesGenerator
+  implements GeneratorInterface<GeneratorOutput> {
+  // Implementation details
+}
+```
+
+This enables the Image Layers Attributes Generator to seamlessly integrate into the Art Engine, produce diverse attributes, and contribute to the creation of layered and customizable artwork.

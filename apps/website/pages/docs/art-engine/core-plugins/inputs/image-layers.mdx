@@ -1,6 +1,3 @@
-import { Callout } from "nextra-theme-docs";
-import Image from "next/image";
-
 # Image Layers Input
 
 The purpose of the Image Layers Input plugin is to provide a flexible way to define image layers and their variations for artwork generation. It acts as a data source for the Image Layers Generator, making it easy to manage and update visual components through a folder structure. The plugin streamlines the process of integrating new assets, allowing artists and developers to focus on creating high-quality elements for unique artworks.
@@ -83,18 +80,9 @@ Remember, this plugin provides flexibility in designing your NFT art with multip
 
 ### Base
 
-This plugin adheres to the base input interface called `InputInterface`, which is a common pattern shared by all input plugins. The interface is defined as follows:
+This plugin adheres to the base input interface called `InputInterface<InputDataType>`.
 
-```ts copy
-export interface InputInitPropsInterface {
-  seed: string;
-}
-
-export default interface InputInterface<InputDataType> {
-  init: (props: InputInitPropsInterface) => Promise<void>;
-  load: () => Promise<InputDataType>;
-}
-```
+- [InputInterface](../../custom-plugins/inputs/interface)
 
 ### Custom
 
@@ -142,7 +130,10 @@ export default interface ImageLayersInputInterface {
 Essentially, the Image Layers Input plugin implements the InputInterface by specializing it with the ImageLayersInputInterface.
 
 ```ts copy
-ImageLayersInput implements InputInterface<ImageLayersInputInterface>
+export class ImageLayersInput
+  implements InputInterface<ImageLayersInputInterface> {
+  // Implementation details
+}
 ```
 
 This enables the plugin to seamlessly integrate into the Art Engine ecosystem, providing a flexible and customizable way to define what the plugin should export.

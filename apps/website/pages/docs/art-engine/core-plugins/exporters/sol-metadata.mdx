@@ -1,6 +1,3 @@
-import { Callout } from "nextra-theme-docs";
-import Image from "next/image";
-
 # Sol Metadata Exporter
 
 The Sol Metadata Exporter plugin serves as a vital component in the Art Engine's export process, facilitating the transformation and exportation of rendered attributes into metadata files adhering to the Solana NFT (Non-Fungible Token) standard. This standard defines the metadata format required to create and display NFTs on the Solana blockchain. The exporter takes the rendered attributes and generates corresponding metadata files for each item, which can then be used to mint and manage NFTs on the Solana network.
@@ -58,3 +55,25 @@ const ae = new ArtEngine({
 - `collectionFamily` (optional): A string representing the family or category of the NFT collection.
 - `creators` (optional): An array of objects, where each object includes the `address` of the NFT creator's Solana wallet and their corresponding `share` in the royalties.
 - `imageUriPrefix` (optional): A string representing the prefix that will be added to the `image` field in the Solana metadata JSON. This allows customization of the image URI for each item. If not provided, a default prefix of "IMAGE*URI_PREFIX*" will be used, and the `dna` value from the rendered attributes will be appended to form the complete image URI.
+
+## Interfaces
+
+### Base
+
+This plugin adheres to the base exporter interface called `ExporterInterface`.
+
+- [ExporterInterface](../../custom-plugins/exporters/interface)
+
+### Custom
+
+The Sol Metadata Exporter plugin epitomizes the essence of exporters within the Art Engine's realm. It harmoniously integrates with the core exporter interface to facilitate the creation of metadata conforming to Solana's distinct NFT format.
+
+Here's a glimpse of the Sol Metadata Exporter class in action:
+
+```ts copy
+export class SolMetadataExporter implements ExporterInterface {
+  // Implementation details
+}
+```
+
+Solana NFTs have their own distinct metadata requirements, necessitating careful crafting to ensure compatibility. The Sol Metadata Exporter skillfully assimilates the rendered data, which includes attributes, DNA, and more, and converts it into metadata that complies with Solana's standard.
