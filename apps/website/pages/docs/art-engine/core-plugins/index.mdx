@@ -1,0 +1,35 @@
+import { Callout } from "nextra-theme-docs";
+import Image from "next/image";
+
+# Core Plugins
+
+The Art Engine 2.0 comes with a powerful set of core plugins that facilitate the generation of NFT art and metadata. These core plugins are divided into four categories: inputs, generators, renderers, and exporters. Each category serves a distinct role in the art generation process.
+
+## Plugins
+
+### Inputs:
+
+These plugins provide the initial data or inputs required for the art generation process. They feed data to the generators.
+
+- [Image Layers Input Plugin](core-plugins/inputs/image-layers)
+
+### Generators:
+
+These plugins take the inputs from the input plugins and generate attribute data that will influence the appearance of the final artwork.
+
+- [Image Layers Attributes Generator](core-plugins/generators/image-layers-attributes)
+
+### Renderers:
+
+These plugins take the generated attribute data from the generators and use it to create visual renders of the artwork.
+
+- [Image Layers Renderer](core-plugins/renderers/image-layers)
+- [Item Attributes Renderer](core-plugins/renderers/item-attributes)
+
+### Exporters:
+
+These plugins take the rendered artwork and metadata and export it into various formats suitable for different NFT platforms.
+
+- [ERC721 Metadata Exporter](core-plugins/exporters/erc721-metadata)
+- [Sol Metadata Exporter](core-plugins/exporters/sol-metadata)
+- [Images Exporter](core-plugins/exporters/images)

@@ -1,0 +1,139 @@
+# Image Layers Input
+
+The purpose of the Image Layers Input plugin is to provide a flexible way to define image layers and their variations for artwork generation. It acts as a data source for the Image Layers Generator, making it easy to manage and update visual components through a folder structure. The plugin streamlines the process of integrating new assets, allowing artists and developers to focus on creating high-quality elements for unique artworks.
+
+## Adding the plugin
+
+1.  Import the plugin object:
+
+```ts copy
+const { ArtEngine, inputs } = require("@hashlips-lab/art-engine");
+```
+
+2. Setup a base path:
+
+```ts copy
+const BASE_PATH = __dirname;
+```
+
+3. Add the plugin to an instance of the Art Engine:
+
+```ts copy
+const ae = new ArtEngine({
+  cachePath: `${BASE_PATH}/cache`,
+  outputPath: `${BASE_PATH}/output`,
+  useCache: false,
+
+  inputs: {
+    apes: new inputs.ImageLayersInput({
+      assetsBasePath: `${BASE_PATH}/data/layers`,
+    }),
+    // Add more inputs if needed...
+  },
+
+  // Add generators, renderers, and exporters as required...
+});
+```
+
+## Parameters
+
+- `assetsBasePath` (string): The path to the folder containing your image layers and attribute folders.
+
+## Dependencies
+
+### Folder Structure and Naming Convention
+
+The `Image Layers Input` plugin uses a specific folder structure and naming convention to organize image layers and their attributes. The naming convention allows you to define attributes such as z-depth, rarity weight, and positional offsets for each layer and option.
+
+The structure should look like this:
+
+```shell copy
+├── data
+│   ├── layers
+│   │   ├── Layer1__z10
+│   │   │   ├── Option1__w10.png
+│   │   │   ├── Option2__w5.png
+│   │   │   └── edge-cases
+│   │   │       └── Option2__tTrait1__vValue1.png
+│   │   ├── Layer2__z20
+│   │   │   ├── Option1__w5.png
+│   │   │   └── edge-cases
+│   │   │       └── Option1__z20__tTrait2__vValue2.png
+│   │   └── ...
+```
+
+- Each layer is represented by a folder with its name (e.g., "Layer1," "Layer2," etc.).
+- Inside each layer folder, you can create sub-folders representing different attribute options (e.g., "Option1," "Option2," etc.). These options correspond to different variations or traits of the layer.
+- Image files within each option folder represent the actual assets for that option. The optional "w" attribute in the filename specifies the rarity weight, which affects the probability of the option being chosen during rendering.
+- The optional "z" attribute in the layer and option folder names allows you to control the z-depth at which the layer and option should be rendered. Lower z-depth values make the layers appear behind higher ones.
+- The optional "x" and "y" attributes in the filename can be used to offset the image when rendered, allowing precise positioning of the assets.
+
+### Edge Cases
+
+Edge cases allow you to define variations for an option based on the attributes of other layers. Inside each option folder, you can create an "edge-cases" sub-folder. The image files within this folder will represent the assets for specific attribute combinations of other layers.
+
+An example edge case filename: `Option1__z20__tTrait2__vValue2.png`. This means that if "Trait2" has the value "Value2," then the asset will be rendered at a z-depth of 20.
+
+Remember, this plugin provides flexibility in designing your NFT art with multiple layers, options, and conditional variations. Understanding the folder structure and naming convention will enable the Art Engine to process your image layers correctly and create unique and diverse NFTs.
+
+## Interfaces
+
+### Base
+
+This plugin adheres to the base input interface called `InputInterface<InputDataType>`.
+
+- [InputInterface](../../custom-plugins/inputs/interface)
+
+### Custom
+
+The `InputInterface` is generic and takes an `InputDataType` as its parameter, which is returned by the `load` function.
+
+For the Image Layers Input plugin, this concept is realized through the `ImageLayersInputInterface`. Keep in mind that the this interface will look different on each plugin's implementation. Here's how the interface structure looks:
+
+```ts copy
+interface LayerAsset {
+  path: string;
+  size: number;
+  relativeXOffset: number;
+  relativeYOffset: number;
+  relativeZOffset: number;
+  lastModifiedTime: number;
+}
+
+export default interface ImageLayersInputInterface {
+  basePath: string;
+  layers: {
+    [traitName: string]: {
+      name: string;
+      baseXOffset: number;
+      baseYOffset: number;
+      baseZOffset: number;
+      options: {
+        [optionName: string]: {
+          name: string;
+          weight: number;
+          assets: LayerAsset[];
+          edgeCases: {
+            [matchUid: string]: {
+              matchingTrait: string;
+              matchingValue: string;
+              assets: LayerAsset[];
+            };
+          };
+        };
+      };
+    };
+  };
+}
+```
+
+Essentially, the Image Layers Input plugin implements the InputInterface by specializing it with the ImageLayersInputInterface.
+
+```ts copy
+export class ImageLayersInput
+  implements InputInterface<ImageLayersInputInterface> {
+  // Implementation details
+}
+```
+
+This enables the plugin to seamlessly integrate into the Art Engine ecosystem, providing a flexible and customizable way to define what the plugin should export.

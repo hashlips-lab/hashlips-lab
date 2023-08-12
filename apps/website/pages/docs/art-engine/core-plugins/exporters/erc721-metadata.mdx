@@ -1,0 +1,64 @@
+# ERC721 Metadata Exporter
+
+The ERC721 Metadata Exporter plugin plays a crucial role in the Art Engine's export process, enabling the transformation and exportation of rendered attributes into ERC721 NFT standard metadata JSON format. This format is widely used in the blockchain industry for representing unique and non-fungible tokens, such as digital artworks. The exporter takes the rendered attributes and generates corresponding metadata files for each item, which can then be used in NFT marketplaces and blockchain applications.
+
+## Adding the plugin
+
+1.  Import the plugin object:
+
+```ts copy
+const { ArtEngine, exporters } = require("@hashlips-lab/art-engine");
+```
+
+2. Setup a base path:
+
+```ts copy
+const BASE_PATH = __dirname;
+```
+
+3. Add the plugin to an instance of the Art Engine:
+
+```ts copy
+const ae = new ArtEngine({
+  cachePath: `${BASE_PATH}/cache`,
+  outputPath: `${BASE_PATH}/output`,
+  useCache: false,
+
+  exporters: [
+    new exporters.Erc721MetadataExporter({
+      metadataFolder: "erc721_metadata",
+      imageUriPrefix: "https://example.com/images/",
+    });
+    // Add more generators if needed...
+  ]
+
+  // Add inputs, exporters, renderers as required...
+});
+```
+
+## Parameters
+
+- `metadataFolder` (optional): A string representing the name of the folder where the ERC721 metadata JSON files will be stored. If not provided, a default folder named "erc721_metadata" will be used.
+- `imageUriPrefix` (optional): A string representing the prefix that will be added to the `image` field in the ERC721 metadata JSON. This allows customization of the image URI for each item. If not provided, a default prefix of "IMAGE*URI_PREFIX*" will be used, and the `dna` value from the rendered attributes will be appended to form the complete image URI.
+
+## Interfaces
+
+### Base
+
+This plugin adheres to the base exporter interface called `ExporterInterface`.
+
+- [ExporterInterface](../../custom-plugins/exporters/interface)
+
+### Custom
+
+The ERC721 Metadata Exporter plugin stands as a compelling embodiment of exporter functionality within the Art Engine's ecosystem. This plugin diligently adheres to the core exporter interface, facilitating the creation of ERC721-compliant metadata for your artworks.
+
+Here's how the ERC721 Metadata Exporter class comes to fruition:
+
+```ts copy
+export class Erc721MetadataExporter implements ExporterInterface {
+  // Implementation details
+}
+```
+
+In this exporter, the rendered data, including attributes and DNA, is amalgamated to generate comprehensive ERC721 metadata files.

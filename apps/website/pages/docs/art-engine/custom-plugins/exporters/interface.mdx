@@ -1,0 +1,28 @@
+# Exporters Interface
+
+All exporter plugins in the Art Engine implement the `ExporterInterface` interface. This interface defines the basic structure that an exporter plugin should follow.
+
+```ts copy
+interface ExporterInterface {
+  init: (props: ExporterInitPropsInterface) => Promise<void>;
+  export: () => Promise<void>;
+}
+```
+
+- `ExporterInterface`: This interface outlines the structure that exporter plugins should adhere to.
+- `init(props: ExporterInitPropsInterface) => Promise<void>`: This method initializes the exporter plugin. It takes an object of type `ExporterInitPropsInterface` as an argument, containing the necessary initialization properties. The method returns a promise that resolves when the initialization is complete.
+- `export() => Promise<void>`: This method is responsible for executing the export process. It returns a promise that resolves when the export process is complete.
+
+```ts copy
+interface ExporterInitPropsInterface {
+  seed: string;
+  outputPath: string;
+  rendersGetter: ItemsDataManager["getRenders"];
+}
+```
+
+`ExporterInitPropsInterface`: This interface defines the properties required to initialize an exporter plugin. It includes the following properties:
+
+- `seed`: A string value that serves as a seed for deterministic behavior. Similar to other plugins, this can be used to ensure consistent results when exporting.
+- `outputPath`: A string representing the path where the exporter plugin should export its content. This could be a directory where generated files, metadata, or assets will be saved.
+- `rendersGetter`: A reference to a function called `getRenders` from the `ItemsDataManager`. This function is used to access the rendered data produced by the renderers.

@@ -1,0 +1,79 @@
+# Sol Metadata Exporter
+
+The Sol Metadata Exporter plugin serves as a vital component in the Art Engine's export process, facilitating the transformation and exportation of rendered attributes into metadata files adhering to the Solana NFT (Non-Fungible Token) standard. This standard defines the metadata format required to create and display NFTs on the Solana blockchain. The exporter takes the rendered attributes and generates corresponding metadata files for each item, which can then be used to mint and manage NFTs on the Solana network.
+
+## Adding the plugin
+
+1.  Import the plugin object:
+
+```ts copy
+const { ArtEngine, exporters } = require("@hashlips-lab/art-engine");
+```
+
+2. Setup a base path:
+
+```ts copy
+const BASE_PATH = __dirname;
+```
+
+3. Add the plugin to an instance of the Art Engine:
+
+```ts copy
+const ae = new ArtEngine({
+  cachePath: `${BASE_PATH}/cache`,
+  outputPath: `${BASE_PATH}/output`,
+  useCache: false,
+
+  exporters: [
+    new exporters.SolMetadataExporter({
+      metadataFolder: "sol_metadata",
+      symbol: "MYNFT",
+      sellerFeeBasisPoints: 500,
+      collectionName: "My Collection",
+      collectionFamily: "Artworks",
+      creators: [
+        {
+          address: "your_solana_wallet_address",
+          share: 100,
+        },
+      ],
+      imageUriPrefix: "https://example.com/images/",
+    });
+    // Add more generators if needed...
+  ]
+
+  // Add inputs, exporters, renderers as required...
+});
+```
+
+## Parameters
+
+- `metadataFolder` (optional): A string representing the name of the folder where the Solana metadata JSON files will be stored. If not provided, a default folder named "sol_metadata" will be used.
+- `symbol` (optional): A string representing the symbol or ticker of the NFT collection.
+- `sellerFeeBasisPoints` (optional): An integer representing the seller fee as a percentage of the sale price in basis points (1 basis point = 0.01%). If not provided, a default value of 0 will be used.
+- `collectionName` (optional): A string representing the name of the NFT collection.
+- `collectionFamily` (optional): A string representing the family or category of the NFT collection.
+- `creators` (optional): An array of objects, where each object includes the `address` of the NFT creator's Solana wallet and their corresponding `share` in the royalties.
+- `imageUriPrefix` (optional): A string representing the prefix that will be added to the `image` field in the Solana metadata JSON. This allows customization of the image URI for each item. If not provided, a default prefix of "IMAGE*URI_PREFIX*" will be used, and the `dna` value from the rendered attributes will be appended to form the complete image URI.
+
+## Interfaces
+
+### Base
+
+This plugin adheres to the base exporter interface called `ExporterInterface`.
+
+- [ExporterInterface](../../custom-plugins/exporters/interface)
+
+### Custom
+
+The Sol Metadata Exporter plugin epitomizes the essence of exporters within the Art Engine's realm. It harmoniously integrates with the core exporter interface to facilitate the creation of metadata conforming to Solana's distinct NFT format.
+
+Here's a glimpse of the Sol Metadata Exporter class in action:
+
+```ts copy
+export class SolMetadataExporter implements ExporterInterface {
+  // Implementation details
+}
+```
+
+Solana NFTs have their own distinct metadata requirements, necessitating careful crafting to ensure compatibility. The Sol Metadata Exporter skillfully assimilates the rendered data, which includes attributes, DNA, and more, and converts it into metadata that complies with Solana's standard.
