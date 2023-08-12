@@ -40,10 +40,10 @@ export const manager = {
 };
 
 // Interfaces
-export * as IInputs from "./common/inputs/input.interface";
-export * as IGenerators from "./common/generators/generator.interface";
-export * as IRenderers from "./common/renderers/renderer.interface";
-export * as IExporters from "./common/exporters/exporter.interface";
+export * from "./common/inputs/input.interface";
+export * from "./common/generators/generator.interface";
+export * from "./common/renderers/renderer.interface";
+export * from "./common/exporters/exporter.interface";
 
 // Cache constants
 export * as CACHE from "./utils/managers/cache/cache.constants";
