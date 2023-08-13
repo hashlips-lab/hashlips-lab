@@ -1,0 +1,47 @@
+# Generator Plugin Example
+
+This template provides a basic structure for a Generator plugin. Developers can use this template as a foundation and customize it to generate data based on the input data available through the `inputsManager`.
+
+```ts copy
+import GeneratorInterface, {
+  GeneratorInitPropsInterface,
+  ItemsAttributes,
+} from "@hashlips-lab/art-engine/dist/common/generators/generator.interface";
+import InputsManager from "@hashlips-lab/art-engine/dist/utils/managers/inputs/inputs.manager";
+
+// Define the structure of the custom generator data
+interface ExampleCustomInterface {
+  example: string;
+}
+
+// Create a class for the Generator plugin
+export class ExampleGenerator
+  implements GeneratorInterface<ExampleCustomInterface>
+{
+  inputsManager!: InputsManager;
+
+  public async init(props: GeneratorInitPropsInterface): Promise<void> {
+    this.inputsManager = props.inputsManager;
+    // Initialization tasks can be performed here
+  }
+
+  public async generate(): Promise<ItemsAttributes<ExampleCustomInterface>> {
+    // Simulate fetching input data, replace with actual data retrieval logic
+    const inputData = this.inputsManager.get("any_existing_input_key");
+
+    // Generate and structure the custom data for each item
+    const items: ItemsAttributes<ExampleCustomInterface> = {
+      1: [
+        {
+          kind: "AnyUniqueGeneratorDataIdentifier@v1",
+          data: {
+            example: inputData.example,
+          },
+        },
+      ],
+    };
+
+    return items;
+  }
+}
+```
