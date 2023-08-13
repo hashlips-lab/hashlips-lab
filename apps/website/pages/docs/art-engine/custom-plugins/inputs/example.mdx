@@ -1,0 +1,26 @@
+# Inputs Plugin Example
+
+This template provides a basic structure for an Inputs plugin. Developers can use this template as a starting point and customize it according to their specific use case and data sources.
+
+```ts copy
+import InputInterface, {
+  InputInitPropsInterface,
+} from "@hashlips-lab/art-engine/dist/common/inputs/input.interface";
+
+// Define the structure of the custom input data
+interface ExampleCustomInterface {
+  example: string;
+}
+
+// Create a class for the Inputs plugin
+export class ExampleInput implements InputInterface<ExampleCustomInterface> {
+  public async init(props: InputInitPropsInterface): Promise<void> {
+    // Initialization tasks can be performed here
+  }
+
+  public async load(): Promise<ExampleCustomInterface> {
+    // Simulate loading input data, replace with actual data retrieval logic
+    return { example: "Hello World" };
+  }
+}
+```
