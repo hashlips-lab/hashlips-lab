@@ -29,16 +29,18 @@ export class ImageLayersAttributesGenerator
   private startIndex: number;
   private endIndex: number;
   private rmg!: RandomSeed.RandomSeed;
+  private ids: number[];
 
   constructor(constructorProps: {
     dataSet: string;
     startIndex: number;
     endIndex: number;
+    ids: number[];
   }) {
     this.dataSet = constructorProps.dataSet;
     this.startIndex = constructorProps.startIndex;
     this.endIndex = constructorProps.endIndex;
-
+    this.ids = constructorProps.ids;
     if (
       this.endIndex < this.startIndex ||
       this.startIndex + this.endIndex < 1

@@ -4,6 +4,7 @@ export interface ExporterInitPropsInterface {
   seed: string;
   outputPath: string;
   rendersGetter: ItemsDataManager["getRenders"];
+  ids?: number[];
 }
 
 export default interface ExporterInterface {

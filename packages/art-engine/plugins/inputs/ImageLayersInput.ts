@@ -24,9 +24,11 @@ export class ImageLayersInput
   implements InputInterface<ImageLayersInputInterface>
 {
   private assetsBasePath!: string;
+  private ids: number[] = [];
 
-  constructor(constructorProps: { assetsBasePath: string }) {
+  constructor(constructorProps: { assetsBasePath: string; ids: number[] }) {
     this.assetsBasePath = constructorProps.assetsBasePath;
+    this.ids = constructorProps.ids;
   }
 
   public async init(props: InputInitPropsInterface) {}
@@ -215,14 +217,20 @@ export class ImageLayersInput
         };
       }
 
-      options[paramsFile.name].edgeCases[edgeCaseUid].assets.push({
+      const edgeCase = {
         path: localPath,
         relativeXOffset: isFolder ? paramsPath.x : paramsFile.x,
         relativeYOffset: isFolder ? paramsPath.y : paramsFile.y,
         relativeZOffset: isFolder ? paramsPath.z : paramsFile.z,
         lastModifiedTime: stats.mtime.getTime(),
         size: stats.size,
-      });
+      };
+
+      if (edgeCase.relativeZOffset != 80) {
+        console.log(edgeCase);
+      }
+
+      options[paramsFile.name].edgeCases[edgeCaseUid].assets.push(edgeCase);
     }
 
     return options;
