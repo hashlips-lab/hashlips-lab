@@ -25,22 +25,26 @@ export class Erc721MetadataExporter implements ExporterInterface {
   private metadataFolder: string;
   private metadataPath!: string;
   private imageUriPrefix: string;
+  private ids: number[];
 
   constructor(
     constructorProps: {
       metadataFolder?: string;
       imageUriPrefix?: string;
+      ids?: number[];
     } = {}
   ) {
     this.metadataFolder = constructorProps.metadataFolder ?? "erc721 metadata";
     this.imageUriPrefix =
       constructorProps.imageUriPrefix ?? "IMAGE_URI_PREFIX_";
+    this.ids = constructorProps.ids ?? [];
   }
 
   public async init(props: ExporterInitPropsInterface) {
     this.rendersGetter = props.rendersGetter;
     this.outputPath = props.outputPath;
     this.metadataPath = path.join(this.outputPath, this.metadataFolder);
+    this.ids = props.ids ?? this.ids;
   }
 
   public async export(): Promise<void> {
@@ -51,7 +55,7 @@ export class Erc721MetadataExporter implements ExporterInterface {
     if (!fs.existsSync(this.metadataPath)) {
       fs.mkdirSync(this.metadataPath);
     }
-
+    let i = 0;
     for (const [itemUid, renders] of Object.entries(this.rendersGetter())) {
       let attributes = renders.find(
         (render) => ITEM_ATTRIBUTES_RENDERER_INTERFACE_V1 === render.kind
@@ -79,15 +83,16 @@ export class Erc721MetadataExporter implements ExporterInterface {
         image: `${this.imageUriPrefix}${attributes?.data.dna[0]}.png`,
         name: attributes?.data.name,
         dna: attributes?.data.dna[0],
-        uid: itemUid,
-        generator: "HashLips Lab AE 2.0",
+        uid: String(this.ids[i]),
+        generator: "Artimunor",
         attributes: normalizedAttributes,
       };
 
       fs.writeFileSync(
-        path.join(this.metadataPath, `${itemUid}.json`),
-        JSON.stringify(metadata, null, 2),
+        path.join(this.metadataPath, `${this.ids[i]}.json`),
+        JSON.stringify(metadata, null, 2)
       );
+      i++;
     }
   }
 }

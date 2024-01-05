@@ -21,6 +21,7 @@ type Config = {
   exporters: ExporterInterface[];
   cachePath: string;
   outputPath: string;
+  ids: number[];
 };
 
 const SEED_CACHE_FILE = "seed.json";
@@ -105,6 +106,7 @@ export default class ArtEngine {
         seed: this.seed!,
         outputPath: this.config.outputPath,
         rendersGetter: () => this.itemsDataManager.getRenders(),
+        ids: this.config.ids,
       });
 
       await exporter.export();

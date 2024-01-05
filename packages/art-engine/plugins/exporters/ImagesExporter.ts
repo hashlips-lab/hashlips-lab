@@ -21,7 +21,6 @@ export class ImagesExporter implements ExporterInterface {
     } = {}
   ) {
     this.imagesFolder = constructorProps.imagesFolder ?? "images";
-    console.log(constructorProps.ids);
     this.ids = constructorProps.ids ?? [];
   }
 
@@ -41,7 +40,6 @@ export class ImagesExporter implements ExporterInterface {
       fs.mkdirSync(this.imagesPath);
     }
     let i = 0;
-    console.log(this.ids);
     for (const [itemUid, renders] of Object.entries(this.rendersGetter())) {
       let image = renders.find(
         (render) => STATIC_LAYERED_IMAGES_RENDERER_INTERFACE_V1 === render.kind

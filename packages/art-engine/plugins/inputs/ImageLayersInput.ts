@@ -24,11 +24,9 @@ export class ImageLayersInput
   implements InputInterface<ImageLayersInputInterface>
 {
   private assetsBasePath!: string;
-  private ids: number[] = [];
 
-  constructor(constructorProps: { assetsBasePath: string; ids: number[] }) {
+  constructor(constructorProps: { assetsBasePath: string }) {
     this.assetsBasePath = constructorProps.assetsBasePath;
-    this.ids = constructorProps.ids;
   }
 
   public async init(props: InputInitPropsInterface) {}
