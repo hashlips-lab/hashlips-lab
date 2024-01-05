@@ -224,9 +224,9 @@ export class ImageLayersInput
         size: stats.size,
       };
 
-      if (edgeCase.relativeZOffset != 80) {
-        console.log(edgeCase);
-      }
+      // if (edgeCase.relativeZOffset != 80) {
+      //   console.log(edgeCase);
+      // }
 
       options[paramsFile.name].edgeCases[edgeCaseUid].assets.push(edgeCase);
     }
