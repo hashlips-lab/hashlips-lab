@@ -36,7 +36,7 @@ export default class ArtEngine {
     this.config = config;
     this.inputsManager = new InputsManager();
     this.itemsDataManager = new ItemsDataManager();
-    Logger.printHero(PackageJson.version);
+    // Logger.printHero(PackageJson.version);
   }
 
   private async load() {
@@ -115,13 +115,9 @@ export default class ArtEngine {
   }
 
   public async run(): Promise<void> {
-    console.log("Loading data...");
     await this.load();
-    console.log("Generating...");
     await this.generate();
-    console.log("Rendering...");
     await this.render();
-    console.log("Exporting...");
     await this.export();
     console.log("Done");
   }

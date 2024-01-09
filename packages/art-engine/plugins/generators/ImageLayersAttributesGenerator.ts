@@ -149,6 +149,7 @@ export class ImageLayersAttributesGenerator
     attributes: AttributesGeneratorInterface["attributes"]
   ): string {
     const dnaSource = Object.keys(attributes)
+      .filter((key) => key !== "body")
       .map((key) => [key, attributes[key]])
       .sort((a, b) => {
         const nameA = a[0].toUpperCase();
